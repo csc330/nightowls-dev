@@ -22,18 +22,24 @@ class User(UserMixin, db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+# load_user is a function that's used by flask_login to manage the session.
+# It simply returns the object associated with the authenticated user.
+@login.user_loader
+def load_user(id):
+    return db.session.query(User).get(int(id))
+
 
 class LoginForm(FlaskForm):
-    username = StringField('username', validators=[DataRequired(), Length(min=4, max=20)])
-    password = PasswordField('password', validators=[DataRequired(), Length(min=5, max=10)])
+    username = StringField('username', validators=[DataRequired()])
+    password = PasswordField('password', validators=[DataRequired()])
     
 
 
 class RegisterForm(FlaskForm):
-    id = IntegerField('id', validators=[DataRequired(),Length(min=3, max=10) ])
-    email = StringField('email', validators=[DataRequired(), Email(message="Invalid Email"), Length(min=6, max=30)])
-    username = StringField('username', validators=[DataRequired(), Length(min=4, max=20)])
-    password = PasswordField('password', validators=[DataRequired(), Length(min=5, max=10)])
-    role = StringField('role', validators=[DataRequired(), Length(min=3, max=20)])
+    id = IntegerField('id', validators=[DataRequired()])
+    email = StringField('email', validators=[DataRequired()])
+    username = StringField('username', validators=[DataRequired()])
+    password = PasswordField('password', validators=[DataRequired()])
+    role = StringField('role', validators=[DataRequired()])
 
 

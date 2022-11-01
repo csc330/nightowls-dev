@@ -1,8 +1,8 @@
 from app import app
 from flask import render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
-#from app.forms import AddForm, DeleteForm, SearchForm, LoginForm, ChangePasswordForm
-#from app import db
+from app.forms import LoginForm, RegisterForm
+from app import db
 from app.forms import User
 import sys
 
@@ -37,10 +37,10 @@ def register():
     form = RegisterForm()
 
     if form.validate_on_submit():
-        hashed_password = generate_password_hash(form.password.data, method='sha256')
-        new_user = User(id=form.id.data, username=form.username.data, email=form.email.data, password=hashed.password, role=form.role.data)
-        db.session.add(new_user)
-        db.session.commit()
+        #hashed_password = generate_password_hash(form.password.data, method='sha256')
+        #new_user = User(id=form.id.data, username=form.username.data, email=form.email.data, password=hashed.password, role=form.role.data)
+        #db.session.add(new_user)
+        #db.session.commit()
         return 'Successfully registered'
 
     return render_template('register.html', form=form)
