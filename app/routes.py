@@ -7,8 +7,9 @@ from flask_login import login_user, logout_user, login_required, current_user
 import sys
 
 @app.route('/')
-def test():
-    return render_template('test.html')
+def index():
+    return render_template('index.html')
+
 
 @app.route('/login')
 def login():
@@ -30,3 +31,24 @@ def login():
         print('Login successful', file=sys.stderr)
         return redirect(url_for('view'))
     return render_template('login.html', form=form)
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegisterForm()
+
+    if form.validate_on_submit():
+        hashed_password = generate_password_hash(form.password.data, method='sha256')
+        new_user = User(id=form.id.data, username=form.username.data, email=form.email.data, password=hashed.password, role=form.role.data)
+        db.session.add(new_user)
+        db.session.commit()
+        return 'Successfully registered'
+
+    return render_template('register.html', form=form)
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
