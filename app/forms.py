@@ -32,6 +32,7 @@ def load_user(id):
 class LoginForm(FlaskForm):
     username = StringField('username', validators=[DataRequired()])
     password = PasswordField('password', validators=[DataRequired()])
+    submit = SubmitField("Submit")
     
 
 
@@ -41,5 +42,6 @@ class RegisterForm(FlaskForm):
     username = StringField('username', validators=[DataRequired()])
     password = PasswordField('password', validators=[DataRequired()])
     role = StringField('role', validators=[DataRequired()])
+    submit = SubmitField("Submit")
 
 

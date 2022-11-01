@@ -52,3 +52,11 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+@app.route('/workplan')
+def work():
+    return render_template('Workplan.html')
+
+@app.route('/evaluation')
+def evaluation():
+    return render_template('Evaluation.html')
+
