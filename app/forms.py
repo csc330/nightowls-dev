@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, SubmitField, StringField, PasswordField
+from wtforms.validators import DataRequired
 from app import db, login
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -23,16 +24,16 @@ class User(UserMixin, db.Model):
 
 
 class LoginForm(FlaskForm):
-    username = StringField('username', validators=[InputRequired(), Length(min=4, max=20)])
-    password = PasswordField('password', validators=[InputRequired(), Length(min=5, max=10)])
+    username = StringField('username', validators=[DataRequired(), Length(min=4, max=20)])
+    password = PasswordField('password', validators=[DataRequired(), Length(min=5, max=10)])
     
 
 
 class RegisterForm(FlaskForm):
-    id = IntegerField('id', validators=[InputRequired(),Length(min=3, max=10) ])
-    email = StringField('email', validators=[InputRequired(), Email(message="Invalid Email"), Length(min=6, max=30)])
-    username = StringField('username', validators=[InputRequired(), Length(min=4, max=20)])
-    password = PasswordField('password', validators=[InputRequired(), Length(min=5, max=10)])
-    role = StringField('role', validators=[InputRequired(), Length(min=3, max=20)])
+    id = IntegerField('id', validators=[DataRequired(),Length(min=3, max=10) ])
+    email = StringField('email', validators=[DataRequired(), Email(message="Invalid Email"), Length(min=6, max=30)])
+    username = StringField('username', validators=[DataRequired(), Length(min=4, max=20)])
+    password = PasswordField('password', validators=[DataRequired(), Length(min=5, max=10)])
+    role = StringField('role', validators=[DataRequired(), Length(min=3, max=20)])
 
 
