@@ -1,0 +1,47 @@
+body {
+	margin: 0;
+	background: #FFFFFF;
+	font-family: 'Work Sans', sans-serif;
+	font-weight: 300;
+}
+
+.container {
+	width: 80%;
+	margin:0 auto;
+}
+
+header {
+	background: #ADD8E6;
+}
+
+header::after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.logo {
+	float: left;
+	padding: 10px 0;
+}
+
+nav {
+	float:right;
+}
+
+nav ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+nav li{
+	display: inline-block;
+	margin-right: 300px;
+	padding-top: 30px;
+}
+
+nav a {
+	color: #444;
+	text-decoration: none;
+	text-transform: uppercase;
