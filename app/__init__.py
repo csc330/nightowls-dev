@@ -29,8 +29,8 @@ db = SQLAlchemy(app)
 
 login = LoginManager(app)
 
-from app import routes, forms
-from app.forms import User
+from app import routes, models
+from app.models import User
 
 # Create DB schema
 db.create_all()

@@ -3,8 +3,12 @@ from flask import render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from app.forms import LoginForm, RegisterForm
 from app import db
-from app.forms import User
+from app.models import User
 import sys
+
+@app.route('/')
+def home():
+    return render_template('Home.html')
 
 @app.route('/success')
 def loginSuccess():
