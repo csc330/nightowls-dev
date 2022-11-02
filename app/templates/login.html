@@ -1,18 +1,44 @@
 {% extends "NavBar.html" %}
 
 {% block content %}
-    
-    <h1 style = color:#3d5a80> Login Here</h1>
+
+<style>
+
+    h1 {
+        text-align: center;
+        color: #3d5a80;
+        font-size: 35px;
+    }
+
+    .box{
+        border: 2px solid #3d5a80;
+        border-radius: 25px;
+        box-shadow: 15px 15px 10px #3d5a80;
+        margin: auto;
+        width: 50%;
+        padding: 50px;
+    }
+
+    p {
+        text-align:center;
+        margin-bottom: 25px;
+    }
+
+</style>
+
+<div class="box">
+<h1> Login Here</h1>
     <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
-            {{ form.username.label }}<br>
-            {{ form.username(size=32) }}
+            {{ form.username.label(style='font-size: 20px;') }}<br>
+            {{ form.username(size=32, style='height: 25px;') }}
         </p>
         <p>
-            {{ form.password.label }}<br>
-            {{ form.password(size=32) }}
+            {{ form.password.label(style='font-size: 20px;') }}<br>
+            {{ form.password(size=32, style='height: 25px;') }}
         </p>
-        <p>{{ form.submit() }}</p>
+        <p>{{ form.submit(style='font-size: 15px; color: #3d5a80;') }}</p>
     </form>
+</div>
 {% endblock %}

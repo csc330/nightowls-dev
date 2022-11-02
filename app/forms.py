@@ -30,18 +30,18 @@ def load_user(id):
 
 
 class LoginForm(FlaskForm):
-    username = StringField('username', validators=[DataRequired()])
-    password = PasswordField('password', validators=[DataRequired()])
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField("Submit")
     
 
 
 class RegisterForm(FlaskForm):
-    id = IntegerField('id', validators=[DataRequired()])
-    email = StringField('email', validators=[DataRequired()])
-    username = StringField('username', validators=[DataRequired()])
-    password = PasswordField('password', validators=[DataRequired()])
-    role = StringField('role', validators=[DataRequired()])
+    id = IntegerField('ID', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired()])
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    role = StringField('Role', validators=[DataRequired()])
     submit = SubmitField("Submit")
 
 

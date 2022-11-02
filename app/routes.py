@@ -36,12 +36,12 @@ def login():
 def register():
     form = RegisterForm()
 
-    if form.validate_on_submit():
+    #if form.validate_on_submit():
         #hashed_password = generate_password_hash(form.password.data, method='sha256')
         #new_user = User(id=form.id.data, username=form.username.data, email=form.email.data, password=hashed.password, role=form.role.data)
         #db.session.add(new_user)
         #db.session.commit()
-        return 'Successfully registered'
+        #return 'Successfully registered'
 
     return render_template('register.html', form=form)
 
