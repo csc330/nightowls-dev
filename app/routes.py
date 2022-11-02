@@ -6,18 +6,24 @@ from app import db
 from app.forms import User
 import sys
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+@app.route('/success')
+def loginSuccess():
+    return render_template('loginSuccess.html')
 
+@app.route('/workplan')
+def work():
+    return render_template('Workplan.html')
 
-@app.route('/login')
+@app.route('/evaluation')
+def evaluation():
+    return render_template('Evaluation.html')
+
+@app.route('/login',methods=['GET', 'POST'])
 def login():
     #check if user is already logged in
     #will redirect to homepage
     if current_user.is_authenticated:
-        return redirect(url_for('/'))
-    
+        return redirect(url_for('loginSuccess'))
     form = LoginForm()
     if form.validate_on_submit():
         # check DB for user by username
@@ -29,7 +35,7 @@ def login():
         # login_user is a flask_login function that starts a session
         login_user(user)
         print('Login successful', file=sys.stderr)
-        return redirect(url_for('view'))
+        return redirect(url_for('loginSuccess'))
     return render_template('login.html', form=form)
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -50,13 +56,8 @@ def register():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))
 
-@app.route('/workplan')
-def work():
-    return render_template('Workplan.html')
 
-@app.route('/evaluation')
-def evaluation():
-    return render_template('Evaluation.html')
+
 
