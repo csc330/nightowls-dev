@@ -5,39 +5,64 @@
 <link href="/" rel="stylesheet" type="text/css">
 <meta charset="UTF-8">
 <title>Navbar</title>
+<style>
+	body {
+		margin: 0;
+		background: #FFFFFF;
+		font-family: 'Work Sans', sans-serif;
+		font-weight: 300;
+	}
+
+	.container{
+        margin: 0 auto 50px auto;
+        width: auto;
+        padding: 50px;
+		text-align: center;
+		background: #ADD8E6;
+    }
+
+	.nav-link {
+	color: #444;
+	text-decoration: none;
+	text-transform: uppercase;
+	}
+
+	.nav-link:active{
+		color:rgb(0, 42, 255);
+		text-decoration: underline;
+	}
+
+	.logo {
+		float: left;
+	}
+
+	.nav-link{
+		margin: 100px;
+	}
+
+	.nav-link:hover{
+		text-shadow: 4px 4px 10px white;
+	}
+
+
+
+</style>
+
 </head>
 
 <body>
-	<img src="peer.png" alt="logo" class="logo">
 	<div class="container">
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				<li class="nav-item">
-					<div style = "position:relative; left:250px; top:60px;">
-					<a class="nav-link" href="./PeerHome.html">Home</a>
-				</li>
-			</ul>
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				<li class="nav-item">
-					<div style = "position:relative; left:550px; top:30px;">
-					<a class="nav-link" href="./workplan">Work Plan</a>
-				</li>
-			</ul>
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				<li class="nav-item">
-					<div style = "position:relative; left:850px; top:-5px;">
-					<a class="nav-link" href="/evaluation">Evaluation</a>
-				</li>
-			</ul>
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				<li class="nav-item">
-					<div style = "position:relative; left:1150px; top:-37px;">
-					<a class="nav-link" href="/login">Login</a>
-				</li>
-			</ul>
+		<img src="peer.png" alt="logo" class="logo">
+
+		<a class="nav-link" href="./PeerHome.html">Home</a>
+
+		<a class="nav-link" href="/workplan">Work Plan</a>
+	
+		<a class="nav-link" href="/evaluation">Evaluation</a>
+
+		<a class="nav-link" href="/login">Login</a>
 				
 	</div>
-
 	{% block content %}{% endblock %}
 </body>
 </html>
