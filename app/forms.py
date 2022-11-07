@@ -18,4 +18,13 @@ class RegisterForm(FlaskForm):
     role = StringField('Role', validators=[DataRequired()])
     submit = SubmitField("Submit")
 
-
+    
+class WorkPlanForm(FlaskForm):
+    username = StringField("User's name: ", validators = [DataRequired()])
+    goal_description = StringField("Goal Description: ", validators = [DataRequired()])
+    submission_time = IntegerField('Time of Submission: ', validators = [DataRequired()])
+    project_description = StringField('Project Description', validators = [DataRequired()])
+    project_members = StringField('Team Members: ', validators = [DataRequired()])
+    current_goals = StringField('Current goals: ', validators = [DataRequired()])
+    completed_goals = BooleanField('Completed Goals', validators = [DataRequired()])
+    submit = SubmitField("Submit")
