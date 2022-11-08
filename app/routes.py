@@ -1,6 +1,7 @@
 from app import app
 from flask import render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
+from flask_sqlalchemy import SQLAlchemy
 from app.forms import LoginForm, RegisterForm
 from app import db
 from app.models import User
@@ -13,6 +14,10 @@ def home():
 @app.route('/success')
 def loginSuccess():
     return render_template('loginSuccess.html')
+
+@app.route('/registerSuccess')
+def registerSuccess():
+    return render_template('registerSuccess.html')
 
 @app.route('/workplan')
 def work():
@@ -46,13 +51,22 @@ def login():
 def register():
     form = RegisterForm()
 
-    #if form.validate_on_submit():
-        #hashed_password = generate_password_hash(form.password.data, method='sha256')
-        #new_user = User(id=form.id.data, username=form.username.data, email=form.email.data, password=hashed.password, role=form.role.data)
-        #db.session.add(new_user)
-        #db.session.commit()
-        #return 'Successfully registered'
-
+    if form.validate_on_submit():
+        #check if user exists
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is None:
+            #get data from form
+            username = form.username.data
+            email = form.email.data
+            password = form.password.data
+            role = 'user'
+            #create user and add to database
+            user = User(email=email, username=username, role=role)
+            user.set_password(password)
+            db.session.add(user)
+            db.session.commit()
+            #will ask user to login to check their credentials
+            return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
 

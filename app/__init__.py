@@ -29,6 +29,9 @@ db = SQLAlchemy(app)
 
 login = LoginManager(app)
 
+# enables @login_required
+login.login_view = 'login'
+
 from app import routes, models
 from app.models import User
 
