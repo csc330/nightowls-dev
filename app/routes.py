@@ -2,7 +2,7 @@ from app import app
 from flask import render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_sqlalchemy import SQLAlchemy
-from app.forms import LoginForm, RegisterForm
+from app.forms import LoginForm, RegisterForm, WorkPlanForm
 from app import db
 from app.models import User
 import sys
@@ -34,7 +34,7 @@ def workplan():
         form.current_goals.data = ''
         form.nextphase_goals.data = ' '
         return redirect(url_for('workplan'))
-    return render_template('Workplan.html',form=form)
+    return render_template('Workplan.html', form=form)
 
 @app.route('/evaluation')
 def evaluation():
@@ -88,9 +88,10 @@ def register():
 def logout():
     logout_user()
     return redirect(url_for('login'))
+
 @app.route('/viewworkplan')
 def viewworkplan():
-    return render_template('view_workplan.html',Work_plan=Work_plan)
+    return render_template('view_workplan.html')
 
 
 
