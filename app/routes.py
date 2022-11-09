@@ -19,9 +19,22 @@ def loginSuccess():
 def registerSuccess():
     return render_template('registerSuccess.html')
 
-@app.route('/workplan')
-def work():
-    return render_template('Workplan.html')
+@app.route('/workplan',methods=['GET', 'POST'])
+def workplan():
+    form = WorkPlanForm()
+    if form.validate_on_submit():
+        Work_plan [form.goal_description.data] = form.WorkPlan.data
+        Work_plan [form.project_description.data] = form.WorkPlan.data
+        Work_plan [form.project_members.data] = form.WorkPlan.data
+        Work_plan [form.current_goals.data] = form.WorkPlan.data
+        Work_plan [form.nextphase_goals.data] = form.WorkPlan.data
+        form.goal_description.data = ''
+        form.project_description.data = ''
+        form.project_members.data = ''
+        form.current_goals.data = ''
+        form.nextphase_goals.data = ' '
+        return redirect(url_for('workplan'))
+    return render_template('Workplan.html',form=form)
 
 @app.route('/evaluation')
 def evaluation():
@@ -75,7 +88,9 @@ def register():
 def logout():
     logout_user()
     return redirect(url_for('login'))
-
+@app.route('/viewworkplan')
+def viewworkplan():
+    return render_template('view_workplan.html',Work_plan=Work_plan)
 
 
 
