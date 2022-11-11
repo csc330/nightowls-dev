@@ -23,9 +23,20 @@ def registerSuccess():
 def work():
     return render_template('Workplan.html')
 
-@app.route('/evaluation')
+@app.route('/evaluation',methods=['GET', 'POST'])
 def evaluation():
-    return render_template('Evaluation.html')
+    form = EvaluationForm()
+    if form.validate_on_submit():
+        Evaluation [form.role_description.data] = form.Evaluation.data
+        Evaluation [form.submission_history.data] = form.Evaluation.data
+        Evaluation [form.add_review.data] = form.Evaluation.data
+        Evaluation [form.add_rating.data] = form.Evaluation.data
+        form.role_description.data = ''
+        form.submission_history.data = ''
+        form.add_review.data = ''
+        form.add_rating.data = ''
+        return redirect(url_for('evaluation'))
+    return render_template('Evaluation.html', form=form)
 
 @app.route('/login',methods=['GET', 'POST'])
 def login():
