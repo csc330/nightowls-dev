@@ -31,5 +31,11 @@ class CreateGroupForm(FlaskForm):
     submit = SubmitField("Submit")
 
 class AddToGroupForm(FlaskForm):
+    groupName = StringField('Group Name', validators=[DataRequired()])
+    username = StringField('Username', validators=[DataRequired()])
+    submit = SubmitField("Submit")
+
+class RemoveFromGroupForm(FlaskForm):
+    groupName = StringField('Group Name', validators=[DataRequired()])
     username = StringField('Username', validators=[DataRequired()])
     submit = SubmitField("Submit")

@@ -25,7 +25,7 @@
 	</style>
 
 </head>
-	<h1 class="header"> Create A Group </h1>
+	<h1 class="header"> Remove a User form a Group </h1>
 	<div class="box">
 	<form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
@@ -33,10 +33,11 @@
             {{ form.groupName.label(style='font-size: 20px;') }}<br>
             {{ form.groupName(size=32, style='height: 25px;') }}
         </p>
+        <p>
+            {{ form.username.label(style='font-size: 20px;') }}<br>
+            {{ form.username(size=32, style='height: 25px;') }}
+        </p>
         <p>{{ form.submit(style='font-size: 15px; color: #3d5a80;') }}</p>
-
-        <p><a href="add_to_group">Add Users to Group</a></p>
-        <p><a href="remove_from_group">Remove Users from Group</a></p>
     </form>
 	</div>
 {% endblock %}

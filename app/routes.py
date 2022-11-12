@@ -2,7 +2,7 @@ from app import app
 from flask import render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_sqlalchemy import SQLAlchemy
-from app.forms import LoginForm, RegisterForm, CreateGroupForm, AddToGroupForm
+from app.forms import LoginForm, RegisterForm, CreateGroupForm, AddToGroupForm, RemoveFromGroupForm
 from app import db
 from app.models import User, Groups
 import sys
@@ -85,9 +85,34 @@ def create_group():
         return redirect(url_for('loginSuccess'))
     return render_template('CreateGroup.html', form=form)
 
-@app.route('/add_to_group')
+@app.route('/add_to_group', methods=['GET', 'POST'])
 def add_to_group():
     form = AddToGroupForm()
+    if form.validate_on_submit():
+        groupName = form.groupName.data
+        username = form.username.data
+
+        group = Groups.query.filter_by(groupName=form.groupName.data).first()
+        groupID = group.id
+
+        user = User.query.filter_by(username=username).first()
+        user.groupID = groupID
+        db.session.commit()
+        return render_template('userSuccess.html')
     return render_template('AddToGroup.html', form=form)
 
+@app.route('/remove_from_group', methods=['GET', 'POST'])
+def remove_from_group():
+    form = RemoveFromGroupForm()
+    if form.validate_on_submit():
+        groupName = form.groupName.data
+        username = form.username.data
 
+        group = Groups.query.filter_by(groupName=form.groupName.data).first()
+        groupID = group.id
+
+        user = User.query.filter_by(username=username).first()
+        user.groupID = None
+        db.session.commit()
+        return render_template('userSuccess.html')
+    return render_template('AddToGroup.html', form=form)
