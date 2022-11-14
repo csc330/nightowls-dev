@@ -11,8 +11,42 @@
 	</style>
 
 </head>
-	<h1 class="header"> Evaluation </h1>
 
+</style>
+	<title> Evaluation </title>
+
+</head>
+
+	<h1 class="header"> Evaluation</h1>
+	<div class="box">
+		<h1> Evaluation </h1>
+			<form action="" method="post" novalidate>
+				{{ form.hidden_tag() }}
+				<p>
+					{{ form.role_description.label(style='font-size: 20px;') }}<br>
+					{{ form.role_description(size=45, style='height: 25px;') }}
+				</p>
+				<p>
+					{{ form.submission_history.label(style='font-size: 20px;') }}<br>
+					{{ form.submission_history(size=45, style='height: 25px;') }}
+				</p>
+
+				<p>	{{ form.add_review.label(style='font-size: 20px;') }}<br>
+					{{ form.add_review(size=45, style='height: 25px;') }}</p>
+				</p>
+
+				<p>	{{ form.add_rating.label(style='font-size: 20px;') }}<br>
+					{{ form.add_rating(size=45, style='height: 25px;') }}</p>
+				</p>
+
+
+				
+				<p>{{ form.submit(style='font-size: 15px; color: #3d5a80;') }}</p>
+		
+				
+			</form>
+		</div>
+</head> 		
 		
 {% endblock %}
 
