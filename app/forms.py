@@ -26,6 +26,14 @@ class WorkPlanForm(FlaskForm):
     completed_goals = BooleanField('Completed Goals', validators = [DataRequired()])
     submit = SubmitField("Submit")
 
+class EvaluationForm(FlaskForm):
+    username = StringField("User's name: ", validators = [DataRequired()])
+    role_description = StringField("Role: ", validators = [DataRequired()])
+    submission_history = IntegerField('Submission History: ', validators = [DataRequired()])
+    add_review = StringField('Reviews: ', validators = [DataRequired()])
+    add_rating = StringField('Ratings: ', validators = [DataRequired()])
+    submit = SubmitField("Submit")
+    
 class CreateGroupForm(FlaskForm):
     groupName = StringField('Group Name', validators=[DataRequired()])
     submit = SubmitField("Submit")
