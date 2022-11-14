@@ -2,11 +2,8 @@ from app import app
 from flask import render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_sqlalchemy import SQLAlchemy
-<<<<<<< HEAD
 from app.forms import LoginForm, RegisterForm, WorkPlanForm
-=======
-from app.forms import LoginForm, RegisterForm, CreateGroupForm, AddToGroupForm, RemoveFromGroupForm
->>>>>>> master
+from app.forms import LoginForm, RegisterForm, CreateGroupForm, AddToGroupForm, RemoveFromGroupForm, EvaluationForm, WorkPlanForm
 from app import db
 from app.models import User, Groups
 import sys
@@ -20,7 +17,7 @@ def loginSuccess():
 def registerSuccess():
     return render_template('registerSuccess.html')
 
-<<<<<<< HEAD
+
 @app.route('/workplan',methods=['GET', 'POST'])
 def workplan():
     form = WorkPlanForm()
@@ -37,11 +34,6 @@ def workplan():
         form.nextphase_goals.data = ' '
         return redirect(url_for('workplan'))
     return render_template('Workplan.html', form=form)
-=======
-@app.route('/workplan')
-def workplan():
-    return render_template('Workplan.html')
->>>>>>> master
 
 @app.route('/evaluation',methods=['GET', 'POST'])
 def evaluation():
@@ -108,11 +100,10 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
-<<<<<<< HEAD
 @app.route('/viewworkplan')
 def viewworkplan():
     return render_template('view_workplan.html')
-=======
+
 @app.route('/create_group', methods=['GET', 'POST'])
 def create_group():
     form = CreateGroupForm()
@@ -130,7 +121,6 @@ def add_to_group():
     if form.validate_on_submit():
         groupName = form.groupName.data
         username = form.username.data
->>>>>>> master
 
         group = Groups.query.filter_by(groupName=form.groupName.data).first()
         groupID = group.id

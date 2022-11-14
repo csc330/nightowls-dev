@@ -19,12 +19,8 @@ class WorkPlanForm(FlaskForm):
     project_description = TextAreaField('Project Description', validators = [DataRequired()])
     project_members = StringField('Team Members: ', validators = [DataRequired()])
     current_goals = StringField('Current goals: ', validators = [DataRequired()])
-<<<<<<< HEAD
     nextphase_goals = TextAreaField('Next phasegoals', validators = [DataRequired()])
     submit = SubmitField("Add a Workplan")
-=======
-    completed_goals = BooleanField('Completed Goals', validators = [DataRequired()])
-    submit = SubmitField("Submit")
 
 class EvaluationForm(FlaskForm):
     username = StringField("User's name: ", validators = [DataRequired()])
@@ -47,4 +43,3 @@ class RemoveFromGroupForm(FlaskForm):
     groupName = StringField('Group Name', validators=[DataRequired()])
     username = StringField('Username', validators=[DataRequired()])
     submit = SubmitField("Submit")
->>>>>>> master
