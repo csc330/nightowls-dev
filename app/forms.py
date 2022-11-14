@@ -16,7 +16,6 @@ class RegisterForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField("Submit")
 
-    
 class WorkPlanForm(FlaskForm):
     username = StringField("User's name: ", validators = [DataRequired()])
     goal_description = StringField("Goal Description: ", validators = [DataRequired()])
@@ -25,4 +24,26 @@ class WorkPlanForm(FlaskForm):
     project_members = StringField('Team Members: ', validators = [DataRequired()])
     current_goals = StringField('Current goals: ', validators = [DataRequired()])
     completed_goals = BooleanField('Completed Goals', validators = [DataRequired()])
+    submit = SubmitField("Submit")
+
+class EvaluationForm(FlaskForm):
+    username = StringField("User's name: ", validators = [DataRequired()])
+    role_description = StringField("Role: ", validators = [DataRequired()])
+    submission_history = IntegerField('Submission History: ', validators = [DataRequired()])
+    add_review = StringField('Reviews: ', validators = [DataRequired()])
+    add_rating = StringField('Ratings: ', validators = [DataRequired()])
+    submit = SubmitField("Submit")
+    
+class CreateGroupForm(FlaskForm):
+    groupName = StringField('Group Name', validators=[DataRequired()])
+    submit = SubmitField("Submit")
+
+class AddToGroupForm(FlaskForm):
+    groupName = StringField('Group Name', validators=[DataRequired()])
+    username = StringField('Username', validators=[DataRequired()])
+    submit = SubmitField("Submit")
+
+class RemoveFromGroupForm(FlaskForm):
+    groupName = StringField('Group Name', validators=[DataRequired()])
+    username = StringField('Username', validators=[DataRequired()])
     submit = SubmitField("Submit")
