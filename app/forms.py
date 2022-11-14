@@ -23,7 +23,7 @@ class WorkPlanForm(FlaskForm):
     submit = SubmitField("Add a Workplan")
 
 class EvaluationForm(FlaskForm):
-    username = StringField("User's name: ", validators = [DataRequired()])
+    username = StringField("Username: ", validators = [DataRequired()])
     role_description = StringField("Role: ", validators = [DataRequired()])
     submission_history = IntegerField('Submission History: ', validators = [DataRequired()])
     add_review = StringField('Reviews: ', validators = [DataRequired()])
