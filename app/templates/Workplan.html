@@ -12,7 +12,51 @@
 
 </head>
 
-	<h1 class="header"> Work Plan</h1>
+</style>
+	<title> Workplan </title>
 
+</head>
+
+	<h1 class="header"> Add Work Plan</h1>
+	<div class="box">
+		<h1> Workplan </h1>
+			<form action="" method="post" novalidate>
+				{{ form.hidden_tag() }}
+				<p>
+					{{ form.goal_description.label(style='font-size: 20px;') }}<br>
+					{{ form.goal_description(size=45, style='height: 25px;') }}
+				</p>
+				<p>
+					{{ form.project_description.label(style='font-size: 20px;') }}<br>
+					{{ form.project_description(size=45, style='height: 25px;') }}
+				</p>
+
+				<p>	{{ form.project_members.label(style='font-size: 20px;') }}<br>
+					{{ form.project_members(size=45, style='height: 25px;') }}</p>
+				</p>
+
+				<p>	{{ form.project_members.label(style='font-size: 20px;') }}<br>
+					{{ form.project_members(size=45, style='height: 25px;') }}</p>
+				</p>
+
+				<p>	{{ form.current_goals.label(style='font-size: 20px;') }}<br>
+					{{ form.current_goals(size=45, style='height: 25px;') }}</p>
+				</p>
+				<p>	{{ form.current_goals.label(style='font-size: 20px;') }}<br>
+					{{ form.current_goals(size=45, style='height: 25px;') }}</p>
+				</p>
+				
+				<p>	{{ form.nextphase_goals.label(style='font-size: 20px;') }}<br>
+					{{ form.nextphase_goals(size=45, style='height: 25px;') }}</p>
+				</p>
+
+
+				
+				<p>{{ form.submit(style='font-size: 15px; color: #3d5a80;') }}</p>
+				<p><a href="/view_workplan">View Current Work Plan </a></p>
 		
+				
+			</form>
+		</div>
+</head> 		
 {% endblock %}
