@@ -114,7 +114,7 @@ def create_group():
         group = Groups(groupName=group)
         db.session.add(group)
         db.session.commit()
-        return redirect(url_for('loginSuccess'))
+        return render_template('groupSuccess.html')
     return render_template('CreateGroup.html', form=form)
 
 @app.route('/add_to_group', methods=['GET', 'POST'])
@@ -131,7 +131,7 @@ def add_to_group():
         user = User.query.filter_by(username=username).first()
         user.groupID = groupID
         db.session.commit()
-        return render_template('userSuccess.html')
+        return render_template('groupSuccess.html')
     return render_template('AddToGroup.html', form=form)
 
 @app.route('/remove_from_group', methods=['GET', 'POST'])
@@ -148,5 +148,5 @@ def remove_from_group():
         user = User.query.filter_by(username=username).first()
         user.groupID = None
         db.session.commit()
-        return render_template('userSuccess.html')
+        return render_template('groupSuccess.html')
     return render_template('AddToGroup.html', form=form)
