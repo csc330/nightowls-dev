@@ -11,16 +11,10 @@
 				width: 200px;
 				text-align: center;
 				border: 4px solid lightblue;
-				 background-color: lightblue;
+				background-color: lightblue;
 			}
-	
 			
-		
-
-			
-		.box{
-		
-			 
+		.box{ 
 			text-align: center;
 			border: 4px Solid LightGray;
 			background-color:LightGray;
@@ -30,91 +24,94 @@
 		td.part2{
 			width:1000px;
 		}
+
+		table{
+			text-align: center;
+			width: 100%;
+		}
 		
 			
 		
 		
 	
 	</style>
+	<h1 class="header"> Evaluation </h1>
 
 </head>
 
 </style>
 	
 
-</head>
-
-	<h1 class="header"> Evaluation</h1>
+<body>
 	
-	<table border= "2">
+	<table class='box' border= "2">
 	<tr><td class= "EvaluationSideBar">
 	<div class="text-center block1">
-	<h2 style="background-color:LightGray;"> Users </h2>
+	<h2> Users </h2>
 	 </div>
 	  <div class="text-center block2">
-	   <h2 style="background-color:Pink;"> Name 1 </h2>
+	   <h2> Name 1 </h2>
 	   <a class="link" href="/Name1">View Profile</a>
 	    </div>
 	    <div class="text-center block3">
-	        <h2 style="background-color:LightGreen;"> Name 2 </h2>
-			<a style="background-color:LightGreen;" class="link" href="/Name2">View Profile</a>
+	        <h2> Name 2 </h2>
+			<a class="link" href="/Name2">View Profile</a>
 	      </div>
 		  <div class="text-center block4">
-	        <h2 style="background-color:Violet;"> Name 3 </h2>
-			<a style="background-color:Violet;" class="link" href="/Name3">View Profile</a>
+	        <h2 > Name 3 </h2>
+			<a class="link" href="/Name3">View Profile</a>
 	      </div>
 		  <div class="text-center block5">
-	        <h2 style="background-color:Yellow;"> Name 4 </h2>
-			<a  style="background-color:Yellow;" class="link" href="/Name4">View Profile</a>
+	        <h2 > Name 4 </h2>
+			<a   class="link" href="/Name4">View Profile</a>
 	      </div>
 		  <div class="text-center block6">
-	        <h2 style="background-color:Purple;"> Name 5 </h2>
-			<a style="background-color:Purple;" class="link" href="/Name5">View Profile</a>
+	        <h2 > Name 5 </h2>
+			<a  class="link" href="/Name5">View Profile</a>
 	      </div>
 		  <div class=" text-center block7">
-	        <h2 style="background-color:MediumSeaGreen;"> Name 6 </h2>
-			<a style="background-color:MediumSeaGreen;" class="link" href="/Name6">View Profile</a>
+	        <h2> Name 6 </h2>
+			<a class="link" href="/Name6"> View Profile</a>
 	      </div>
 			
 			
 
 	<td class="part2">
 	<div class="box">
-		<h1> Evaluation </h1>
-			<form action="" method="post" novalidate>
-				{{ form.hidden_tag() }}
-				<p>
-					{{ form.role_description.label(style='font-size: 20px;') }}<br>
-					{{ form.role_description(size=45, style='height: 25px;') }}
-				</p>
-				<p>
-					{{ form.submission_history.label(style='font-size: 20px;') }}<br>
-					{{ form.submission_history(size=45, style='height: 25px;') }}
-				</p>
+		<h1> Create an Evaluation </h1>
+		<form action="" method="post" novalidate>
+			{{ form.hidden_tag() }}
+			<p>
+				{{ form.username.label(style='font-size: 20px;') }}<br>
+				{{ form.username(size=45, style='height: 25px;') }}
+			</p>
+			<p>
+				{{ form.role_description.label(style='font-size: 20px;') }}<br>
+				{{ form.role_description(size=45, style='height: 25px;') }}
+			</p>
+			<p>
+				{{ form.submission_history.label(style='font-size: 20px;') }}<br>
+				{{ form.submission_history(size=45, style='height: 25px;') }}
+			</p>
 
-				<p>	{{ form.add_review.label(style='font-size: 20px;') }}<br>
-					{{ form.add_review(size=45, style='height: 25px;') }}</p>
-				</p>
+			<p>	{{ form.add_review.label(style='font-size: 20px;') }}<br>
+				{{ form.add_review(size=45, style='height: 25px;') }}</p>
+			</p>
 
-				<p>	{{ form.add_rating.label(style='font-size: 20px;') }}<br>
-					{{ form.add_rating(size=45, style='height: 25px;') }}</p>
-				</p>
+			<p>	{{ form.add_rating.label(style='font-size: 20px;') }}<br>
+				{{ form.add_rating(size=45, style='height: 25px;') }}</p>
+			</p>
 
 
-				
-				<p>{{ form.submit(style='font-size: 15px; color: #3d5a80;') }}</p>
-		
-				
-			</form>
+			
+			<p>{{ form.submit(style='font-size: 15px; color: #3d5a80;') }}</p>
+	
+			
+		</form>
 			
 		</div>
 		</td></tr>
-
-
-    
-   
-	 
-</head> 		
+	</body> 		
 		
 {% endblock %}
 
