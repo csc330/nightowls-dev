@@ -2,7 +2,7 @@ from app import app
 from flask import render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_sqlalchemy import SQLAlchemy
-from app.forms import LoginForm, RegisterForm, CreateGroupForm, AddToGroupForm, RemoveFromGroupForm
+from app.forms import LoginForm, RegisterForm, CreateGroupForm, AddToGroupForm, RemoveFromGroupForm, EvaluationForm
 from app import db
 from app.models import User, Groups
 import sys
@@ -28,6 +28,7 @@ def evaluation():
         Evaluation [form.submission_history.data] = form.Evaluation.data
         Evaluation [form.add_review.data] = form.Evaluation.data
         Evaluation [form.add_rating.data] = form.Evaluation.data
+        
         form.role_description.data = ''
         form.submission_history.data = ''
         form.add_review.data = ''
