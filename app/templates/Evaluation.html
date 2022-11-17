@@ -2,22 +2,83 @@
 {% block content %}
 <head>
 	<style>
-		.header{
-			color:#3d5a80;
-			text-align: center;
-		}
 	
+		.header{
+			text-align: center;
+			}
+
+			td.EvaluationSideBar{
+				width: 200px;
+				text-align: center;
+				border: 4px solid lightblue;
+				 background-color: lightblue;
+			}
+	
+			
+		
+
+			
+		.box{
+		
+			 
+			text-align: center;
+			border: 4px Solid LightGray;
+			background-color:LightGray;
+			
+		
+		}
+		td.part2{
+			width:1000px;
+		}
+		
+			
+		
+		
 	
 	</style>
 
 </head>
 
 </style>
-	<title> Evaluation </title>
+	
 
 </head>
 
 	<h1 class="header"> Evaluation</h1>
+	
+	<table border= "2">
+	<tr><td class= "EvaluationSideBar">
+	<div class="text-center block1">
+	<h2 style="background-color:LightGray;"> Users </h2>
+	 </div>
+	  <div class="text-center block2">
+	   <h2 style="background-color:Pink;"> Name 1 </h2>
+	   <a class="link" href="/Name1">View Profile</a>
+	    </div>
+	    <div class="text-center block3">
+	        <h2 style="background-color:LightGreen;"> Name 2 </h2>
+			<a style="background-color:LightGreen;" class="link" href="/Name2">View Profile</a>
+	      </div>
+		  <div class="text-center block4">
+	        <h2 style="background-color:Violet;"> Name 3 </h2>
+			<a style="background-color:Violet;" class="link" href="/Name3">View Profile</a>
+	      </div>
+		  <div class="text-center block5">
+	        <h2 style="background-color:Yellow;"> Name 4 </h2>
+			<a  style="background-color:Yellow;" class="link" href="/Name4">View Profile</a>
+	      </div>
+		  <div class="text-center block6">
+	        <h2 style="background-color:Purple;"> Name 5 </h2>
+			<a style="background-color:Purple;" class="link" href="/Name5">View Profile</a>
+	      </div>
+		  <div class=" text-center block7">
+	        <h2 style="background-color:MediumSeaGreen;"> Name 6 </h2>
+			<a style="background-color:MediumSeaGreen;" class="link" href="/Name6">View Profile</a>
+	      </div>
+			
+			
+
+	<td class="part2">
 	<div class="box">
 		<h1> Evaluation </h1>
 			<form action="" method="post" novalidate>
@@ -45,7 +106,14 @@
 		
 				
 			</form>
+			
 		</div>
+		</td></tr>
+
+
+    
+   
+	 
 </head> 		
 		
 {% endblock %}

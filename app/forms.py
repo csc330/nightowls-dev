@@ -22,6 +22,7 @@ class WorkPlanForm(FlaskForm):
     nextphase_goals = TextAreaField('Next phasegoals', validators = [DataRequired()])
     submit = SubmitField("Add a Workplan")
 
+
 class EvaluationForm(FlaskForm):
     username = StringField("User's name: ", validators = [DataRequired()])
     role_description = StringField("Role: ", validators = [DataRequired()])
@@ -29,7 +30,8 @@ class EvaluationForm(FlaskForm):
     add_review = StringField('Reviews: ', validators = [DataRequired()])
     add_rating = StringField('Ratings: ', validators = [DataRequired()])
     submit = SubmitField("Submit")
-    
+
+
 class CreateGroupForm(FlaskForm):
     groupName = StringField('Group Name', validators=[DataRequired()])
     submit = SubmitField("Submit")
