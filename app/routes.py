@@ -107,42 +107,46 @@ def viewworkplan():
 @app.route('/create_group', methods=['GET', 'POST'])
 def create_group():
     form = CreateGroupForm()
-    if form.validate_on_submit():        
+    if form.validate_on_submit():  
+        #get data from the form      
         group = form.groupName.data
+        #create a new group and add it to the database
         group = Groups(groupName=group)
         db.session.add(group)
         db.session.commit()
-        return redirect(url_for('loginSuccess'))
+        return render_template('groupSuccess.html')
     return render_template('CreateGroup.html', form=form)
 
 @app.route('/add_to_group', methods=['GET', 'POST'])
 def add_to_group():
     form = AddToGroupForm()
     if form.validate_on_submit():
+        #get the data from the form
         groupName = form.groupName.data
         username = form.username.data
-
+        #get group name and id from database
         group = Groups.query.filter_by(groupName=form.groupName.data).first()
         groupID = group.id
-
+        #add groupID to the user and commit changes
         user = User.query.filter_by(username=username).first()
         user.groupID = groupID
         db.session.commit()
-        return render_template('userSuccess.html')
+        return render_template('groupSuccess.html')
     return render_template('AddToGroup.html', form=form)
 
 @app.route('/remove_from_group', methods=['GET', 'POST'])
 def remove_from_group():
     form = RemoveFromGroupForm()
     if form.validate_on_submit():
+        #get data from form
         groupName = form.groupName.data
         username = form.username.data
-
+        #get group name and id from database
         group = Groups.query.filter_by(groupName=form.groupName.data).first()
         groupID = group.id
-
+        #set users groupID to none, this removes the groupID
         user = User.query.filter_by(username=username).first()
         user.groupID = None
         db.session.commit()
-        return render_template('userSuccess.html')
+        return render_template('groupSuccess.html')
     return render_template('AddToGroup.html', form=form)
