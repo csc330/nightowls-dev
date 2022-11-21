@@ -30,3 +30,19 @@ class User(UserMixin, db.Model):
 @login.user_loader
 def load_user(id):
     return db.session.query(User).get(int(id))
+
+class Project(db.Model):
+    __tablename__ = 'project'
+    id = db.Column(db.Integer, primary_key=True)
+    project_name = db.Column(db.String(64), unique=True)
+    project_description = db.Column(db.String(200), unique=True)
+    date = db.Column(db.String(64))
+    admin_id = db.Column(db.Integer)
+
+class Evaluation(db.Model):
+    __tablename__ = 'evaluation'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(64), unique=True)
+    rating = db.Column(db.Integer, unique=True)
+    review = db.Column(db.String(64))
+
