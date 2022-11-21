@@ -54,6 +54,8 @@ if user is None:
     reg_user.set_password('csc330')
     db.session.add(reg_user)
     db.session.commit()
-
+    
+# creating dictinary to save workplan data for now until db is ready to store date
+Work_plan = {}
 
 

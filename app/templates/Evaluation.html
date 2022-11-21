@@ -2,17 +2,117 @@
 {% block content %}
 <head>
 	<style>
-		.header{
-			color:#3d5a80;
-			text-align: center;
-		}
 	
+		.header{
+			text-align: center;
+			}
+
+			td.EvaluationSideBar{
+				width: 200px;
+				text-align: center;
+				border: 4px solid lightblue;
+				background-color: lightblue;
+			}
+			
+		.box{ 
+			text-align: center;
+			border: 4px Solid LightGray;
+			background-color:LightGray;
+			
+		
+		}
+		td.part2{
+			width:1000px;
+		}
+
+		table{
+			text-align: center;
+			width: 100%;
+		}
+		
+			
+		
+		
 	
 	</style>
-
-</head>
 	<h1 class="header"> Evaluation </h1>
 
+</head>
+
+</style>
+	
+
+<body>
+
+	<table class='box' border= "2">
+	<tr><td class= "EvaluationSideBar">
+	<div class="text-center block1">
+	<h2> Users </h2>
+	 </div>
+	  <div class="text-center block2">
+	   <h2> Name 1 </h2>
+	   <a class="link" href="/Name1">View Profile</a>
+	    </div>
+	    <div class="text-center block3">
+	        <h2> Name 2 </h2>
+			<a class="link" href="/Name2">View Profile</a>
+	      </div>
+		  <div class="text-center block4">
+	        <h2 > Name 3 </h2>
+			<a class="link" href="/Name3">View Profile</a>
+	      </div>
+		  <div class="text-center block5">
+	        <h2 > Name 4 </h2>
+			<a   class="link" href="/Name4">View Profile</a>
+	      </div>
+		  <div class="text-center block6">
+	        <h2 > Name 5 </h2>
+			<a  class="link" href="/Name5">View Profile</a>
+	      </div>
+		  <div class=" text-center block7">
+	        <h2> Name 6 </h2>
+			<a class="link" href="/Name6"> View Profile</a>
+	      </div>
+			
+			
+
+	<td class="part2">
+	<div class="box">
+		<h1> Create an Evaluation </h1>
+		<form action="" method="post" novalidate>
+			{{ form.hidden_tag() }}
+			<p>
+				{{ form.username.label(style='font-size: 20px;') }}<br>
+				{{ form.username(size=45, style='height: 25px;') }}
+			</p>
+			
+			<p>
+				{{ form.role_description.label(style='font-size: 20px;') }}<br>
+				{{ form.role_description(size=45, style='height: 25px;') }}
+			</p>
+			<p>
+				{{ form.submission_history.label(style='font-size: 20px;') }}<br>
+				{{ form.submission_history(size=45, style='height: 25px;') }}
+			</p>
+
+			<p>	{{ form.add_review.label(style='font-size: 20px;') }}<br>
+				{{ form.add_review(size=45, style='height: 25px;') }}</p>
+			</p>
+
+			<p>	{{ form.add_rating.label(style='font-size: 20px;') }}<br>
+				{{ form.add_rating(size=45, style='height: 25px;') }}</p>
+			</p>
+
+
+			
+			<p>{{ form.submit(style='font-size: 15px; color: #3d5a80;') }}</p>
+	
+			
+		</form>
+			
+		</div>
+		</td></tr>
+	</body> 		
 		
 {% endblock %}
 
