@@ -27,10 +27,8 @@ class EvaluationForm(FlaskForm):
     username = StringField("Username: ", validators = [DataRequired()])
     role_description = StringField("Role: ", validators = [DataRequired()])
     submission_history = IntegerField('Submission History: ', validators = [DataRequired()])
-    question1 = RadioField('Rating: ', choices=[('value', '1'), ('value_two', '2'), ('value_three', '3'), ('value_four', '4'), ('value_five', '5')])
-    question2 = RadioField('Rating: ', choices=[('value', '1'), ('value_two', '2'), ('value_three', '3'), ('value_four', '4'), ('value_five', '5')])
-    question3 = RadioField('Rating: ', choices=[('value', '1'), ('value_two', '2'), ('value_three', '3'), ('value_four', '4'), ('value_five', '5')])
-    add_review = StringField('Reviews: ', validators = [DataRequired()])
+    # add something for question
+    add_review = TextAreaField('Further Comments: ', validators = [DataRequired()])
     add_rating = StringField('Ratings: ', validators = [DataRequired()])
     submit = SubmitField("Submit")
 
