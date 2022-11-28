@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, url_for
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, SubmitField, StringField, PasswordField, BooleanField, TextAreaField
+from wtforms import StringField, IntegerField, SubmitField, StringField, PasswordField, BooleanField, TextAreaField, RadioField
 from wtforms.validators import DataRequired
 
 class LoginForm(FlaskForm):
@@ -27,6 +27,9 @@ class EvaluationForm(FlaskForm):
     username = StringField("Username: ", validators = [DataRequired()])
     role_description = StringField("Role: ", validators = [DataRequired()])
     submission_history = IntegerField('Submission History: ', validators = [DataRequired()])
+    question1 = RadioField('Rating: ', choices=[('value', '1'), ('value_two', '2'), ('value_three', '3'), ('value_four', '4'), ('value_five', '5')])
+    question2 = RadioField('Rating: ', choices=[('value', '1'), ('value_two', '2'), ('value_three', '3'), ('value_four', '4'), ('value_five', '5')])
+    question3 = RadioField('Rating: ', choices=[('value', '1'), ('value_two', '2'), ('value_three', '3'), ('value_four', '4'), ('value_five', '5')])
     add_review = StringField('Reviews: ', validators = [DataRequired()])
     add_rating = StringField('Ratings: ', validators = [DataRequired()])
     submit = SubmitField("Submit")

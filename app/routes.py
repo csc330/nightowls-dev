@@ -149,4 +149,9 @@ def remove_from_group():
         user.groupID = None
         db.session.commit()
         return render_template('groupSuccess.html')
-    return render_template('AddToGroup.html', form=form)
+    return render_template('RemoveFromGroup.html', form=form)
+
+@app.route('/view_groups')
+def view_groups():
+    groups = Groups.query
+    return render_template('ViewGroups.html', groups=groups)

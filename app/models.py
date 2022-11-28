@@ -46,3 +46,11 @@ class Evaluation(db.Model):
     rating = db.Column(db.Integer, unique=True)
     review = db.Column(db.String(64))
 
+class Task(db.Model):
+    __tablename__ = 'task'
+    id = db.Column(db.Integer, primary_key=True)
+    task_name = db.Column(db.String(64))
+    info = db.Column(db.String(200))
+    task_completed = db.Column(db.String(64))
+    
+
