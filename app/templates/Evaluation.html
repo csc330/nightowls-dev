@@ -29,6 +29,11 @@
 			text-align: center;
 			width: 100%;
 		}
+
+		input{
+			margin-left: 20px;
+			
+		}
 		
 	</style>
 	<h1 class="header"> Evaluation </h1>
@@ -82,14 +87,40 @@
 				{{ form.username.label(style='font-size: 20px;') }}<br>
 				{{ form.username(size=45, style='height: 25px;') }}
 			</p>
-			
+
 			<p>
 				{{ form.role_description.label(style='font-size: 20px;') }}<br>
 				{{ form.role_description(size=45, style='height: 25px;') }}
 			</p>
 
+			<div class="box">
+				<h4> Has this team member contributed in every team meeting? <br> 
+					And have they maintained communication throughout the project? </h4>
+				<input type="radio" name="p" id="1" value="1"><label for="1">1</label>
+				<input type="radio" name="p" id="2" value="2"><label for="2">2</label>
+				<input type="radio" name="p" id="3" value="3"><label for="3">3</label>
+				<input type="radio" name="p" id="4" value="4"><label for="4">4</label>
+				<input type="radio" name="p" id="5" value="5"><label for="5">5</label>
+				
+				<h4> Has this team member submitted all their work on time? <br> 
+					And have they completed all their tasks? </h4>
+				<input type="radio" name="p" id="1" value="1"><label for="1">1</label>
+				<input type="radio" name="p" id="2" value="2"><label for="2">2</label>
+				<input type="radio" name="p" id="3" value="3"><label for="3">3</label>
+				<input type="radio" name="p" id="4" value="4"><label for="4">4</label>
+				<input type="radio" name="p" id="5" value="5"><label for="5">5</label>
+
+				<h4> How would you rate the quality of this person work? </h4>
+				<input type="radio" name="p" id="1" value="1"><label for="1">1</label>
+				<input type="radio" name="p" id="2" value="2"><label for="2">2</label>
+				<input type="radio" name="p" id="3" value="3"><label for="3">3</label>
+				<input type="radio" name="p" id="4" value="4"><label for="4">4</label>
+				<input type="radio" name="p" id="5" value="5"><label for="5">5</label>
+
+		 	</div>
+
 			<p>	{{ form.add_review.label(style='font-size: 20px;') }}<br>
-				{{ form.add_review(size=45, style='height: 25px;') }}</p>
+				{{ form.add_review(size=45, style='height: 100px; width: 700px;') }}</p>
 			</p>
 
 			<p>	{{ form.add_rating.label(style='font-size: 20px;') }}<br>
