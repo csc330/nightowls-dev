@@ -111,7 +111,7 @@ def create_group():
         #get data from the form      
         group = form.groupName.data
         #create a new group and add it to the database
-        group = Groups(groupName=group)
+        group = Group(groupName=group)
         db.session.add(group)
         db.session.commit()
         return render_template('groupSuccess.html')
@@ -125,7 +125,7 @@ def add_to_group():
         groupName = form.groupName.data
         username = form.username.data
         #get group name and id from database
-        group = Groups.query.filter_by(groupName=form.groupName.data).first()
+        group = Group.query.filter_by(groupName=form.groupName.data).first()
         groupID = group.id
         #add groupID to the user and commit changes
         user = User.query.filter_by(username=username).first()
@@ -142,7 +142,7 @@ def remove_from_group():
         groupName = form.groupName.data
         username = form.username.data
         #get group name and id from database
-        group = Groups.query.filter_by(groupName=form.groupName.data).first()
+        group = Group.query.filter_by(groupName=form.groupName.data).first()
         groupID = group.id
         #set users groupID to none, this removes the groupID
         user = User.query.filter_by(username=username).first()
@@ -153,5 +153,5 @@ def remove_from_group():
 
 @app.route('/view_groups')
 def view_groups():
-    groups = Groups.query
+    groups = Group.query
     return render_template('ViewGroups.html', groups=groups)

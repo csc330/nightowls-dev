@@ -10,6 +10,7 @@ class User(UserMixin, db.Model):
     First_name= db.Column(db.String(64), unique=True)
     Last_name = db.Column(db.String(64), unique=True)
     username = db.Column(db.String(64), unique=True)
+    role = db.Column(db.String(64), unique=True)
     email = db.Column(db.String(64), unique=True)
     password_hash = db.Column(db.String(256), unique=True)
     member= db.relationship('Member',backref='member4',lazy=True)
@@ -70,8 +71,6 @@ class Task(db.Model):
 class Member(db.Model):
      __tablename__ = 'member'
      id = db.Column(db.Integer,db.ForeignKey(User.id),primary_key=True)
-     role = db.Column(db.String(64), unique=True)
-     is_admin = db.Column(db.String(64),default=False)
      group_id = db.Column(db.Integer, db.ForeignKey(Group.id), unique=True)
      eval_id = db.Column(db.Integer,db.ForeignKey(Evaluation.id), unique=True)
      task_id = db.Column(db.Integer,db.ForeignKey(Task.id), nullable=False, unique=True)
