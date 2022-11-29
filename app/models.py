@@ -1,22 +1,20 @@
 from app import db, login
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+#import date model to store dates
+from datetime import datetime
 
 
-class Groups(db.Model):
-    __tablename__ = 'groups'
-    id = db.Column(db.Integer, primary_key=True)
-    groupName = db.Column(db.String(64), unique=True)
-    users = db.relationship('User', backref='groups', lazy='dynamic')
-    
+
 class User(UserMixin, db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), unique=True)
+    First_name= db.Column(db.String(64), unique=True)
+    Last_name = db.Column(db.String(64), unique=True)
     email = db.Column(db.String(64), unique=True)
-    role = db.Column(db.String(64))
     password_hash = db.Column(db.String(256), unique=True)
-    groupID = db.Column(db.Integer, db.ForeignKey('groups.id'))
+    memember= db.relationship('Memember',backref='memember',lazy=True)
+    evaluation= db.relationship('Evaluation',backref='evaluation',lazy=True)
 
     def set_password(self, password):
         # Store hashed (encrypted) password in database
@@ -31,26 +29,61 @@ class User(UserMixin, db.Model):
 def load_user(id):
     return db.session.query(User).get(int(id))
 
-class Project(db.Model):
-    __tablename__ = 'project'
+class Group(db.Model):
+    __tablename__ = 'group'
     id = db.Column(db.Integer, primary_key=True)
-    project_name = db.Column(db.String(64), unique=True)
-    project_description = db.Column(db.String(200), unique=True)
-    date = db.Column(db.String(64))
-    admin_id = db.Column(db.Integer)
+    groupName = db.Column(db.String(64), unique=True)
+    group_desc= db.Column(db.String(124))
+    # creating relationship to workplans
+    workplans= db.relationship('Workplan',backref='workplan',lazy=True)
+    member = db.relationship('Member',backref='member',lazy=True)
+   
+    
+    
+
+class WorkPlan(db.Model):
+    __tablename__ = 'workplan'
+    id = db.Column(db.Integer, primary_key=True)
+    Workplan_name = db.Column(db.String(64))
+    Workplan_description = db.Column(db.String(200))
+    Current_goal= db.Column(db.String(200))
+    Next_Phase_Goal = db.Column(db.String(200))
+    start_date = db.Column(db.DateTime)
+    end_date = db.Column(db.DateTime)
+    group_id = db.column(db.Integer, db.ForeignKey(Group.id),nullable=False)
 
 class Evaluation(db.Model):
     __tablename__ = 'evaluation'
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), unique=True)
-    rating = db.Column(db.Integer, unique=True)
-    review = db.Column(db.String(64))
-
+    user = db.Column(db.Integer,db.ForeignKey(User.id),nullable=False)
+    rating = db.Column(db.Integer(10))
+    finished_tasks = db.Column(db.boolean, default=False)
+    Completed_all_tasks = db.Column(db.boolean, default=False)
+    finished_on_time= db.Column(db.boolean, default=False)
+    date = db.Column(db.DateTime)
+    member= db.relationship('Member',backref='member',lazy=True)
+    
 class Task(db.Model):
     __tablename__ = 'task'
     id = db.Column(db.Integer, primary_key=True)
-    task_name = db.Column(db.String(64))
+    task_name = db.Column(db.String(64),unique=True)
     info = db.Column(db.String(200))
-    task_completed = db.Column(db.String(64))
+    task_completed =  db.Column(db.boolean, default=False)
+    member= db.relationship('Member',backref='member',lazy=True)
     
+class Member(db.Model):
+     __tablename__ = 'member'
+     id = db.Column(db.Integer,db.ForeignKey(User.id),primary_key=True)
+     role = db.Column(db.String(64), unique=True)
+     is_admin = db.Column(db.boolean,default=False)
+     group_id = db.column(db.Integer, db.ForeignKey(Group.id),unique=True)
+     eval_id = db.column(db.Integer,db.ForeignKey(Evaluation.id), unique=True)
+     task_id = db.column(db.Integer,db.ForeignKey(Task.id), nullable=False, unique=True)
+     
+     
+     
+     
+     
+     
+
 
