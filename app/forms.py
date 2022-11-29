@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, url_for
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, SubmitField, StringField, PasswordField, BooleanField, TextAreaField
+from wtforms import StringField, IntegerField, SubmitField, StringField, PasswordField, BooleanField, TextAreaField, RadioField
 from wtforms.validators import DataRequired
 
 class LoginForm(FlaskForm):
@@ -19,21 +19,20 @@ class WorkPlanForm(FlaskForm):
     project_description = TextAreaField('Project Description', validators = [DataRequired()])
     project_members = StringField('Team Members: ', validators = [DataRequired()])
     current_goals = StringField('Current goals: ', validators = [DataRequired()])
-<<<<<<< HEAD
     nextphase_goals = TextAreaField('Next phasegoals', validators = [DataRequired()])
     submit = SubmitField("Add a Workplan")
-=======
-    completed_goals = BooleanField('Completed Goals', validators = [DataRequired()])
-    submit = SubmitField("Submit")
+
 
 class EvaluationForm(FlaskForm):
-    username = StringField("User's name: ", validators = [DataRequired()])
+    username = StringField("Username: ", validators = [DataRequired()])
     role_description = StringField("Role: ", validators = [DataRequired()])
     submission_history = IntegerField('Submission History: ', validators = [DataRequired()])
-    add_review = StringField('Reviews: ', validators = [DataRequired()])
+    # add something for question
+    add_review = TextAreaField('Further Comments: ', validators = [DataRequired()])
     add_rating = StringField('Ratings: ', validators = [DataRequired()])
     submit = SubmitField("Submit")
-    
+
+
 class CreateGroupForm(FlaskForm):
     groupName = StringField('Group Name', validators=[DataRequired()])
     submit = SubmitField("Submit")
@@ -47,4 +46,3 @@ class RemoveFromGroupForm(FlaskForm):
     groupName = StringField('Group Name', validators=[DataRequired()])
     username = StringField('Username', validators=[DataRequired()])
     submit = SubmitField("Submit")
->>>>>>> master

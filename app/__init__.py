@@ -1,6 +1,7 @@
 from flask import Flask
 # New imports
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from flask_login import LoginManager
 from dotenv import load_dotenv
 from os import environ
@@ -26,6 +27,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]= True
 
 # Create database connection and associate it with the Flask application
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 login = LoginManager(app)
 
@@ -52,6 +54,7 @@ if user is None:
     reg_user.set_password('csc330')
     db.session.add(reg_user)
     db.session.commit()
+    
 # creating dictinary to save workplan data for now until db is ready to store date
 Work_plan = {}
 
