@@ -10,11 +10,11 @@ class User(UserMixin, db.Model):
     First_name= db.Column(db.String(64), unique=True)
     Last_name = db.Column(db.String(64), unique=True)
     username = db.Column(db.String(64), unique=True)
-    role = db.Column(db.String(64), unique=True)
+    role = db.Column(db.String(64))
     email = db.Column(db.String(64), unique=True)
     password_hash = db.Column(db.String(256), unique=True)
-    member= db.relationship('Member',backref='member4',lazy=True)
-    evaluation= db.relationship('Evaluation',backref='evaluation',lazy=True)
+    member = db.relationship('Member',backref='member4',lazy=True)
+    evaluation = db.relationship('Evaluation',backref='evaluation',lazy=True)
 
     def set_password(self, password):
         # Store hashed (encrypted) password in database
@@ -70,10 +70,10 @@ class Task(db.Model):
     
 class Member(db.Model):
      __tablename__ = 'member'
-     id = db.Column(db.Integer,db.ForeignKey(User.id),primary_key=True)
-     group_id = db.Column(db.Integer, db.ForeignKey(Group.id), unique=True)
-     eval_id = db.Column(db.Integer,db.ForeignKey(Evaluation.id), unique=True)
-     task_id = db.Column(db.Integer,db.ForeignKey(Task.id), nullable=False, unique=True)
+     id = db.Column(db.Integer, db.ForeignKey(User.id), primary_key=True)
+     group_id = db.Column(db.Integer, db.ForeignKey(Group.id))
+     eval_id = db.Column(db.Integer,db.ForeignKey(Evaluation.id))
+     task_id = db.Column(db.Integer,db.ForeignKey(Task.id))
      
      
      

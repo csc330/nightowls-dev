@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from app.forms import LoginForm, RegisterForm, WorkPlanForm
 from app.forms import LoginForm, RegisterForm, CreateGroupForm, AddToGroupForm, RemoveFromGroupForm, EvaluationForm, WorkPlanForm
 from app import db
-from app.models import User, Group
+from app.models import User, Group, Member
 import sys
 
 
@@ -80,14 +80,18 @@ def register():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None:
             #get data from form
+            First_name = form.first_name.data
+            Last_name = form.last_name.data
             username = form.username.data
             email = form.email.data
             password = form.password.data
             role = 'user'
             #create user and add to database
-            user = User(email=email, username=username, role=role)
+            user = User(First_name=First_name, Last_name=Last_name, email=email, username=username, role=role)
             user.set_password(password)
             db.session.add(user)
+            member = Member(id=userID, group_id=None, eval_id=None, task_id=None)
+            db.session.add(member)
             db.session.commit()
             #will ask user to login to check their credentials
             return redirect(url_for('login'))
@@ -127,9 +131,13 @@ def add_to_group():
         #get group name and id from database
         group = Group.query.filter_by(groupName=form.groupName.data).first()
         groupID = group.id
-        #add groupID to the user and commit changes
+        #get the user id
         user = User.query.filter_by(username=username).first()
-        user.groupID = groupID
+        userID = user.id
+        members = Member.query
+        for member in members:
+            if user.id == member.id:
+                member.group_id=group.id
         db.session.commit()
         return render_template('groupSuccess.html')
     return render_template('AddToGroup.html', form=form)
@@ -146,7 +154,11 @@ def remove_from_group():
         groupID = group.id
         #set users groupID to none, this removes the groupID
         user = User.query.filter_by(username=username).first()
-        user.groupID = None
+        userID = user.id
+        members = Member.query
+        for member in members:
+            if user.id == member.id:
+                member.group_id=None
         db.session.commit()
         return render_template('groupSuccess.html')
     return render_template('RemoveFromGroup.html', form=form)
@@ -154,4 +166,6 @@ def remove_from_group():
 @app.route('/view_groups')
 def view_groups():
     groups = Group.query
-    return render_template('ViewGroups.html', groups=groups)
+    members = Member.query
+    user = User.query
+    return render_template('ViewGroups.html', groups=groups, members=members, user=user)
