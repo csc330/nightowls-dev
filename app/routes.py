@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from app.forms import LoginForm, RegisterForm, WorkPlanForm
 from app.forms import LoginForm, RegisterForm, CreateGroupForm, AddToGroupForm, RemoveFromGroupForm, EvaluationForm, WorkPlanForm
 from app import db
-from app.models import User, Groups
+from app.models import User, Group
 import sys
 
 
