@@ -13,8 +13,8 @@ class User(UserMixin, db.Model):
     role = db.Column(db.String(64))
     email = db.Column(db.String(64), unique=True)
     password_hash = db.Column(db.String(256), unique=True)
-    member = db.relationship('Member',backref='member4',lazy=True)
-    evaluation = db.relationship('Evaluation',backref='evaluation',lazy=True)
+    member  = db.relationship('Member',backref='member4',lazy=True)
+    evaluation  = db.relationship('Evaluation',backref='evaluation',lazy=True)
 
     def set_password(self, password):
         # Store hashed (encrypted) password in database

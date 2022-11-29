@@ -30,6 +30,14 @@
 <form action = "" method = "post" novalidate>
 	{{ form.hidden_tag() }}
 	<p>
+		{{ form.first_name.label(style='font-size: 20px;') }}<br>
+		{{ form.first_name(size=32, style='height: 25px;') }}
+	</p>
+    <p>
+		{{ form.last_name.label(style='font-size: 20px;') }}<br>
+		{{ form.last_name(size=32, style='height: 25px;') }}
+	</p>
+    <p>
 		{{ form.username.label(style='font-size: 20px;') }}<br>
 		{{ form.username(size=32, style='height: 25px;') }}
 	</p>
