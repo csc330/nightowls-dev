@@ -118,7 +118,7 @@ def create_group():
         group = Group(groupName=group)
         db.session.add(group)
         db.session.commit()
-        return render_template('groupSuccess.html')
+        return redirect(url_for('view_groups'))
     return render_template('CreateGroup.html', form=form)
 
 @app.route('/add_to_group', methods=['GET', 'POST'])
@@ -139,7 +139,7 @@ def add_to_group():
             if user.id == member.id:
                 member.group_id=group.id
         db.session.commit()
-        return render_template('groupSuccess.html')
+        return redirect(url_for('view_groups'))
     return render_template('AddToGroup.html', form=form)
 
 @app.route('/remove_from_group', methods=['GET', 'POST'])
@@ -160,7 +160,7 @@ def remove_from_group():
             if user.id == member.id:
                 member.group_id=None
         db.session.commit()
-        return render_template('groupSuccess.html')
+        return redirect(url_for('view_groups'))
     return render_template('RemoveFromGroup.html', form=form)
 
 @app.route('/view_groups')
