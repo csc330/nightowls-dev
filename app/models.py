@@ -73,7 +73,7 @@ class Member(db.Model):
      id = db.Column(db.Integer, db.ForeignKey(User.id), primary_key=True)
      group_id = db.Column(db.Integer, db.ForeignKey(Group.id))
      eval_id = db.Column(db.Integer,db.ForeignKey(Evaluation.id))
-     task_id = db.Column(db.Integer,db.ForeignKey(Task.id))
+     task_id = db.Column(db.Integer,db.ForeignKey(Task.id)) 
      
      
      
