@@ -19,6 +19,7 @@ def registerSuccess():
 
 
 @app.route('/workplan',methods=['GET', 'POST'])
+@login_required
 def workplan():
     form = WorkPlanForm()
     if form.validate_on_submit():
@@ -36,6 +37,7 @@ def workplan():
     return render_template('Workplan.html', form=form)
 
 @app.route('/evaluation',methods=['GET', 'POST'])
+@login_required
 def evaluation():
     form = EvaluationForm()
     if form.validate_on_submit():
@@ -105,67 +107,91 @@ def logout():
     return redirect(url_for('login'))
 
 @app.route('/viewworkplan')
+@login_required
 def viewworkplan():
     return render_template('view_workplan.html')
 
 @app.route('/create_group', methods=['GET', 'POST'])
+@login_required
 def create_group():
-    form = CreateGroupForm()
-    if form.validate_on_submit():  
-        #get data from the form      
-        group = form.groupName.data
-        #create a new group and add it to the database
-        group = Group(groupName=group)
-        db.session.add(group)
-        db.session.commit()
-        return redirect(url_for('view_groups'))
-    return render_template('CreateGroup.html', form=form)
+    if is_admin():
+        form = CreateGroupForm()
+        if form.validate_on_submit():  
+            #get data from the form      
+            group = form.groupName.data
+            #create a new group and add it to the database
+            group = Group(groupName=group)
+            db.session.add(group)
+            db.session.commit()
+            return redirect(url_for('view_groups'))
+        return render_template('CreateGroup.html', form=form)
+    else:
+        return render_template('unauthorized.html')
 
 @app.route('/add_to_group', methods=['GET', 'POST'])
+@login_required
 def add_to_group():
-    form = AddToGroupForm()
-    if form.validate_on_submit():
-        #get the data from the form
-        groupName = form.groupName.data
-        username = form.username.data
-        #get group name and id from database
-        group = Group.query.filter_by(groupName=form.groupName.data).first()
-        groupID = group.id
-        #get the user id
-        user = User.query.filter_by(username=username).first()
-        userID = user.id
-        members = Member.query
-        for member in members:
-            if user.id == member.id:
-                member.group_id=group.id
-        db.session.commit()
-        return redirect(url_for('view_groups'))
-    return render_template('AddToGroup.html', form=form)
+    if is_admin():
+        form = AddToGroupForm()
+        if form.validate_on_submit():
+            #get the data from the form
+            groupName = form.groupName.data
+            username = form.username.data
+            #get group name and id from database
+            group = Group.query.filter_by(groupName=form.groupName.data).first()
+            groupID = group.id
+            #get the user id
+            user = User.query.filter_by(username=username).first()
+            userID = user.id
+            members = Member.query
+            for member in members:
+                if user.id == member.id:
+                    member.group_id=group.id
+            db.session.commit()
+            return redirect(url_for('view_groups'))
+        return render_template('AddToGroup.html', form=form)
+    return render_template('unauthorized.html')
 
 @app.route('/remove_from_group', methods=['GET', 'POST'])
+@login_required
 def remove_from_group():
-    form = RemoveFromGroupForm()
-    if form.validate_on_submit():
-        #get data from form
-        groupName = form.groupName.data
-        username = form.username.data
-        #get group name and id from database
-        group = Group.query.filter_by(groupName=form.groupName.data).first()
-        groupID = group.id
-        #set users groupID to none, this removes the groupID
-        user = User.query.filter_by(username=username).first()
-        userID = user.id
-        members = Member.query
-        for member in members:
-            if user.id == member.id:
-                member.group_id=None
-        db.session.commit()
-        return redirect(url_for('view_groups'))
-    return render_template('RemoveFromGroup.html', form=form)
+    if is_admin():
+        form = RemoveFromGroupForm()
+        if form.validate_on_submit():
+            #get data from form
+            groupName = form.groupName.data
+            username = form.username.data
+            #get group name and id from database
+            group = Group.query.filter_by(groupName=form.groupName.data).first()
+            groupID = group.id
+            #set users groupID to none, this removes the groupID
+            user = User.query.filter_by(username=username).first()
+            userID = user.id
+            members = Member.query
+            for member in members:
+                if user.id == member.id:
+                    member.group_id=None
+            db.session.commit()
+            return redirect(url_for('view_groups'))
+        return render_template('RemoveFromGroup.html', form=form)
+    return render_template('unauthorized.html')
 
 @app.route('/view_groups')
+@login_required
 def view_groups():
     groups = Group.query
     members = Member.query
     user = User.query
     return render_template('ViewGroups.html', groups=groups, members=members, user=user)
+
+def is_admin():
+    '''
+    Helper function to determine if authenticated user is an admin.
+    '''
+    if current_user:
+        if current_user.role == 'admin':
+            return True
+        else:
+            return False
+    else:
+        print('User not authenticated.', file=sys.stderr)
