@@ -23,6 +23,12 @@
         margin-bottom: 25px;
     }
 
+	button{
+		text-align: center;
+		margin: auto;
+		
+	}
+
 </style>
 
 <div class="box">
@@ -49,7 +55,8 @@
 		{{ form.password.label(style='font-size: 20px;') }} <br>
 		{{ form.password(size=32, style='height: 25px;') }}
 	</p>
-	<p> {{ form.submit(style='font-size: 15px; color: #3d5a80;') }} </p>
 	</form>
+	<p> {{ form.submit(style='font-size: 30px; color: #3d5a80;') }} </p>
+	<p><a href="/login">Cancel</a></p>
 </div>
 {% endblock %}
