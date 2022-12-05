@@ -52,6 +52,12 @@ def evaluation():
         return redirect(url_for('evaluation'))
     return render_template('Evaluation.html', form=form)
 
+@app.route('/view_evaluations')
+@login_required
+def view_evaluation():
+    return render_template('viewEvaluations.html')
+
+
 @app.route('/login',methods=['GET', 'POST'])
 @app.route('/', methods=['GET', 'POST'])
 def login():
