@@ -58,9 +58,14 @@ def evaluation():
         userID = user.id
         #create evaluation object and add to table
         evaluation = Evaluation(user=userID, rating=add_rating, rating1=rating1, rating2=rating2, rating3=rating3, finished_tasks=finished_tasks, finished_on_time=finished_on_time, add_review=add_review, date=date)
-        
-        #commit to database
         db.session.add(evaluation)
+        get_eval = db.session.query(Evaluation).filter_by(user=userID).first()
+        evalID = get_eval.id
+        members = Member.query
+        for member in members:
+            if user.id == member.id:
+                member.eval_id=evalID
+        #commit to database
         db.session.commit()
 
         return render_template('success.html')
