@@ -107,7 +107,7 @@ def register():
             db.session.add(user)
             #get user id and create a new member in database
             user = db.session.query(User).filter_by(username=form.username.data).first()
-
+            userID = user.id
             member = Member(id=userID, group_id=None, eval_id=None, task_id=None)
             db.session.add(member)
             db.session.commit()
