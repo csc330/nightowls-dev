@@ -1,11 +1,12 @@
 from app import app
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_sqlalchemy import SQLAlchemy
 from app.forms import LoginForm, RegisterForm, WorkPlanForm
 from app.forms import LoginForm, RegisterForm, CreateGroupForm, AddToGroupForm, RemoveFromGroupForm, EvaluationForm, WorkPlanForm
 from app import db
-from app.models import User, Group, Member
+from app.models import User, Group, Member, Evaluation
+import datetime
 import sys
 
 
@@ -41,15 +42,27 @@ def workplan():
 def evaluation():
     form = EvaluationForm()
     if form.validate_on_submit():
-        Evaluation [form.role_description.data] = form.Evaluation.data
-        Evaluation [form.submission_history.data] = form.Evaluation.data
-        Evaluation [form.add_review.data] = form.Evaluation.data
-        Evaluation [form.add_rating.data] = form.Evaluation.data
-        form.role_description.data = ''
-        form.submission_history.data = ''
-        form.add_review.data = ''
-        form.add_rating.data = ''
-        return redirect(url_for('evaluation'))
+        #get data from the form
+        user = form.username.data
+        finished_tasks = form.finished_tasks.data
+        finished_on_time = form.finished_on_time.data
+        rating1 = request.form['question1']
+        rating2 = request.form['question2']
+        rating3 = request.form['question3']
+        date = datetime.datetime.now()
+        add_review = form.add_review.data
+        add_rating = form.add_rating.data
+
+        #get user id to add to evaluation table
+        user = db.session.query(User).filter_by(username=form.username.data).first()
+        userID = user.id
+        #create evaluation object and add to table
+        evaluation = Evaluation(user=userID, rating=add_rating, rating1=rating1, rating2=rating2, rating3=rating3, finished_tasks=finished_tasks, finished_on_time=finished_on_time, add_review=add_review, date=date)
+        #commit to database
+        db.session.add(evaluation)
+        db.session.commit()
+
+        return render_template('success.html')
     return render_template('Evaluation.html', form=form)
 
 @app.route('/view_evaluations')
@@ -98,6 +111,9 @@ def register():
             user = User(First_name=First_name, Last_name=Last_name, email=email, username=username, role=role)
             user.set_password(password)
             db.session.add(user)
+            #get user id and create a new member in database
+            user = db.session.query(User).filter_by(username=form.username.data).first()
+            userID = user.id
             member = Member(id=userID, group_id=None, eval_id=None, task_id=None)
             db.session.add(member)
             db.session.commit()

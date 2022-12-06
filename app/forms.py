@@ -27,11 +27,11 @@ class WorkPlanForm(FlaskForm):
 
 class EvaluationForm(FlaskForm):
     username = StringField("Username: ", validators = [DataRequired()])
-    role_description = StringField("Role: ", validators = [DataRequired()])
-    submission_history = IntegerField('Submission History: ', validators = [DataRequired()])
+    finished_tasks = StringField("Finished Tasks: ", validators = [DataRequired()])
+    finished_on_time = StringField('Finished on Time: ', validators=[DataRequired()])
     # add something for question
     add_review = TextAreaField('Further Comments: ', validators = [DataRequired()])
-    add_rating = StringField('Ratings: ', validators = [DataRequired()])
+    add_rating = StringField('Overall Rating: ', validators = [DataRequired()])
     submit = SubmitField("Submit")
 
 
