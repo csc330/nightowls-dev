@@ -6,3 +6,4 @@ MYSQL_IP='35.184.1.250'
 MYSQL_USER='root'
 MYSQL_PASS='570Howard_1'
 MYSQL_DB='nightowls-dev'
+

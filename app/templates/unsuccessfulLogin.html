@@ -24,6 +24,11 @@
         text-align:center;
         margin-bottom: 25px;
     }
+    
+    h3{
+        color: red;
+        text-align: center;
+    }
 
 </style>
 
@@ -31,6 +36,8 @@
 <h1> Login Here</h1>
     <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
+        <h3> Invalid Username or Password <br>
+            Please try again </h3>
         <p>
             {{ form.username.label(style='font-size: 20px;') }}<br>
             {{ form.username(size=32, style='height: 25px;') }}
