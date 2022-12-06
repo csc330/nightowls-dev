@@ -54,9 +54,12 @@ class Evaluation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.Integer,db.ForeignKey(User.id), nullable=False)
     rating = db.Column(db.Integer())
+    rating1 = db.Column(db.Integer())
+    rating2 = db.Column(db.Integer())
+    rating3 = db.Column(db.Integer())
     finished_tasks = db.Column(db.String(64), default=False)
-    Completed_all_tasks = db.Column(db.String(64), default=False)
     finished_on_time= db.Column(db.String(64), default=False)
+    add_review = db.Column(db.String(64))
     date = db.Column(db.DateTime)
     member= db.relationship('Member',backref='member2',lazy=True)
     

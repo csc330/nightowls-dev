@@ -41,15 +41,21 @@ def workplan():
 def evaluation():
     form = EvaluationForm()
     if form.validate_on_submit():
-        Evaluation [form.role_description.data] = form.Evaluation.data
-        Evaluation [form.submission_history.data] = form.Evaluation.data
-        Evaluation [form.add_review.data] = form.Evaluation.data
-        Evaluation [form.add_rating.data] = form.Evaluation.data
-        form.role_description.data = ''
-        form.submission_history.data = ''
-        form.add_review.data = ''
-        form.add_rating.data = ''
-        return redirect(url_for('evaluation'))
+        user = form.username.data
+        finished_tasks = form.finished_tasks.data
+        finished_on_time = form.finished_on_time.data
+        rating1 = request.form['question1']
+        rating2 = request.form['question2']
+        rating3 = request.form['question3']
+        add_review = form.add_review.data
+        add_rating = form.add_rating.data
+
+        evaluation = Evaluation(user=user, rating=add_rating, rating1=rating1, rating2=rating2, rating3=rating3, finished_tasks=finished_tasks, finished_on_time=finished_on_time, add_review=add_review)
+
+        db.session.add(evaluation)
+        db.session.commit()
+
+        return render_template('groupSuccess.html')
     return render_template('Evaluation.html', form=form)
 
 @app.route('/login',methods=['GET', 'POST'])
