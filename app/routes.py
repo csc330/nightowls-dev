@@ -15,10 +15,6 @@ import sys
 def loginSuccess():
     return render_template('loginSuccess.html')
 
-@app.route('/registerSuccess')
-def registerSuccess():
-    return render_template('registerSuccess.html')
-
 
 @app.route('/workplan',methods=['GET', 'POST'])
 @login_required
@@ -133,7 +129,7 @@ def register():
                 db.session.add(member)
                 db.session.commit()
                 #will ask user to login to check their credentials
-                return redirect(url_for('login'))
+                return render_template('registerSuccess.html')
         else:
             return render_template('unsuccessfulRegister.html', form=form)
     return render_template('register.html', form=form)
