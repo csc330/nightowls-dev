@@ -42,9 +42,9 @@ class WorkPlan(db.Model):
     __tablename__ = 'workplan'
     id = db.Column(db.Integer, primary_key=True)
     Workplan_name = db.Column(db.String(64))
-    Workplan_description = db.Column(db.String(200))
-    Current_goal= db.Column(db.String(200))
-    Next_Phase_Goal = db.Column(db.String(200))
+    goal1 = db.Column(db.String(200))
+    goal2 = db.Column(db.String(200))
+    goal3 = db.Column(db.String(200))
     start_date = db.Column(db.DateTime)
     end_date = db.Column(db.DateTime)
     group_id = db.Column(db.Integer, db.ForeignKey(Group.id))
@@ -62,21 +62,14 @@ class Evaluation(db.Model):
     add_review = db.Column(db.String(64))
     date = db.Column(db.DateTime)
     member= db.relationship('Member',backref='member2',lazy=True)
-    
-class Task(db.Model):
-    __tablename__ = 'task'
-    id = db.Column(db.Integer, primary_key=True)
-    task_name = db.Column(db.String(64),unique=True)
-    info = db.Column(db.String(200))
-    task_completed =  db.Column(db.String(64), default=False)
-    member= db.relationship('Member',backref='member3',lazy=True)
+
     
 class Member(db.Model):
      __tablename__ = 'member'
      id = db.Column(db.Integer, db.ForeignKey(User.id), primary_key=True)
      group_id = db.Column(db.Integer, db.ForeignKey(Group.id))
      eval_id = db.Column(db.Integer,db.ForeignKey(Evaluation.id))
-     task_id = db.Column(db.Integer,db.ForeignKey(Task.id)) 
+     workplan_id = db.Column(db.Integer,db.ForeignKey(WorkPlan.id)) 
      
      
      

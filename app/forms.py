@@ -18,8 +18,10 @@ class RegisterForm(FlaskForm):
 
 class WorkPlanForm(FlaskForm):
     goal_description = TextAreaField("Goal Description: ", validators = [DataRequired()])
-    project_description = TextAreaField('Project Description', validators = [DataRequired()])
-    project_members = StringField('Team Members: ', validators = [DataRequired()])
+    groupName = StringField('Group Name: ', validators = [DataRequired()])
+    goal1 = TextAreaField('Project Description', validators = [DataRequired()])
+    goal2 = TextAreaField('Project Description', validators = [DataRequired()])
+    goal3 = TextAreaField('Project Description', validators = [DataRequired()])
     current_goals = StringField('Current goals: ', validators = [DataRequired()])
     nextphase_goals = TextAreaField('Next phasegoals', validators = [DataRequired()])
     submit = SubmitField("Add a Workplan")
