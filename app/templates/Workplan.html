@@ -2,7 +2,7 @@
 {% block content %}
 <head>
 	<style>
-		.header{
+		.header, h2{
 			color:#3d5a80;
 			text-align: center;
 		}
@@ -26,27 +26,35 @@
 	<h1 class="header"> Workplan</h1>
 	<div class="box">
 		<h1 class="header"> Add Workplan </h1>
+		<h2>Add Goals that you would like this teams to accomplish.</h2>
 			<form action="" method="post" novalidate>
 				{{ form.hidden_tag() }}
 			
 
-				<p>	{{ form.project_members.label(style='font-size: 20px;') }}<br>
-					{{ form.project_members(size=45, style='height: 50px; width: 500px;') }}</p>
-				</p>
+				<p>	{{ form.groupName.label(style='font-size: 20px;') }}<br>
+					{{ form.groupName(size=45, style='height: 25px; width: 200px;') }}</p>
 
-				<p>	{{ form.current_goals.label(style='font-size: 20px;') }}<br>
-					{{ form.current_goals(size=45, style='height: 100px; width: 500px;') }}</p>
-				</p>
+
+				<p>	{{ form.start_date.label(style='font-size: 20px;') }}<br>
+					{{ form.start_date(size=45) }}</p>
+
+				<p>	{{ form.end_date.label(style='font-size: 20px;') }}<br>
+					{{ form.end_date(size=45) }}</p>
+			
+
+				<p>	{{ form.goal1.label(style='font-size: 20px;') }}<br>
+					{{ form.goal1(size=45, style='height: 50px; width: 400px;') }}</p>
+
+
+				<p>	{{ form.goal2.label(style='font-size: 20px;') }}<br>
+					{{ form.goal2(size=45, style='height: 50px; width: 400px;') }}</p>
+
+
+				<p>	{{ form.goal3.label(style='font-size: 20px;') }}<br>
+					{{ form.goal3(size=45, style='height: 50px; width: 400px;') }}</p>
+
 				
-				<p>
-					{{ form.project_description.label(style='font-size: 20px;') }}<br>
-					{{ form.project_description(size=45, style='height: 100px; width: 700px;') }}
-				</p>
-				
-				<p>	{{ form.nextphase_goals.label(style='font-size: 20px;') }}<br>
-					{{ form.nextphase_goals(size=45, style='height: 100px; width: 700px;') }}</p>
-				</p>
-				
+
 				<p>{{ form.submit(style='font-size: 20px; color: #3d5a80;') }}</p>
 				<p><a href="/view_workplan">View Current Work Plan </a></p>
 		

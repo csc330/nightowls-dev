@@ -54,9 +54,11 @@
 <body>
 	<div class="container">
 		<img src="https://cdn.discordapp.com/attachments/933456101263958056/1037439996090658898/peer.png" alt="logo" class="logo">
-		
+		{% if not current_user.is_authenticated %}
 		<a class="nav-link" href="/login">Login</a>
-		
+		{% else %}
+		<a class="nav-link" href="/login">Logout</a>
+		{% endif %}
 		<a class="nav-link" href="/workplan">Work Plan</a>
 	
 		<a class="nav-link" href="/evaluation">Evaluation</a>

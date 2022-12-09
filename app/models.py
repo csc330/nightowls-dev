@@ -33,7 +33,6 @@ class Group(db.Model):
     __tablename__ = 'group'
     id = db.Column(db.Integer, primary_key=True)
     groupName = db.Column(db.String(64), unique=True)
-    group_desc = db.Column(db.String(124))
     # creating relationship to workplans
     workplans = db.relationship('WorkPlan',backref='workplan',lazy=True)
     member = db.relationship('Member',backref='member1',lazy=True)
@@ -45,8 +44,8 @@ class WorkPlan(db.Model):
     goal1 = db.Column(db.String(200))
     goal2 = db.Column(db.String(200))
     goal3 = db.Column(db.String(200))
-    start_date = db.Column(db.DateTime)
-    end_date = db.Column(db.DateTime)
+    start_date = db.Column(db.String(64))
+    end_date = db.Column(db.String(64))
     group_id = db.Column(db.Integer, db.ForeignKey(Group.id))
 
 class Evaluation(db.Model):
@@ -61,6 +60,7 @@ class Evaluation(db.Model):
     finished_on_time= db.Column(db.String(64), default=False)
     add_review = db.Column(db.String(64))
     date = db.Column(db.DateTime)
+    workplan_id = db.Column(db.Integer,db.ForeignKey(WorkPlan.id))
     member= db.relationship('Member',backref='member2',lazy=True)
 
     

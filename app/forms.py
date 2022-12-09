@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, url_for
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, SubmitField, StringField, PasswordField, BooleanField, TextAreaField, RadioField
+from wtforms import StringField, IntegerField, SubmitField, StringField, PasswordField, BooleanField, TextAreaField, RadioField, DateField
 from wtforms.validators import DataRequired
 
 class LoginForm(FlaskForm):
@@ -17,13 +17,13 @@ class RegisterForm(FlaskForm):
     submit = SubmitField("Submit")
 
 class WorkPlanForm(FlaskForm):
-    goal_description = TextAreaField("Goal Description: ", validators = [DataRequired()])
     groupName = StringField('Group Name: ', validators = [DataRequired()])
-    goal1 = TextAreaField('Project Description', validators = [DataRequired()])
-    goal2 = TextAreaField('Project Description', validators = [DataRequired()])
-    goal3 = TextAreaField('Project Description', validators = [DataRequired()])
-    current_goals = StringField('Current goals: ', validators = [DataRequired()])
-    nextphase_goals = TextAreaField('Next phasegoals', validators = [DataRequired()])
+    workplan_name = StringField('WorkPlan Name: ', validators = [DataRequired()])
+    goal1 = TextAreaField('Goal 1:', validators = [DataRequired()])
+    goal2 = TextAreaField('Goal 2:', validators = [DataRequired()])
+    goal3 = TextAreaField('Goal 3:', validators = [DataRequired()])
+    start_date = DateField('Add Start Date: ', validators = [DataRequired()], format='%m-%d-%Y')
+    end_date = DateField('Add End Date: ', validators = [DataRequired()], format='%m-%d-%Y')
     submit = SubmitField("Add a Workplan")
 
 
