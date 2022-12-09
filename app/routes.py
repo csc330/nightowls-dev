@@ -77,6 +77,7 @@ def evaluation():
 @app.route('/view_evaluations')
 @login_required
 def view_evaluation():
+    evaluations = Evaluation.query
     return render_template('viewEvaluations.html')
 
 
