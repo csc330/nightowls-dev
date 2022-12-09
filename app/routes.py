@@ -6,7 +6,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from app.forms import LoginForm, RegisterForm, WorkPlanForm
 from app.forms import LoginForm, RegisterForm, CreateGroupForm, AddToGroupForm, RemoveFromGroupForm, EvaluationForm, WorkPlanForm
 from app import db
-from app.models import User, Group, Member, Evaluation
+from app.models import User, Group, Member, Evaluation, WorkPlan
 import datetime
 import sys
 
@@ -42,6 +42,7 @@ def evaluation():
         if form.validate_on_submit():
             #get data from the form
             user = form.username.data
+            workplan_name = form.workplan_name.data
             finished_tasks = form.finished_tasks.data
             finished_on_time = form.finished_on_time.data
             rating1 = request.form['question1']
@@ -53,12 +54,16 @@ def evaluation():
 
             #get user id to add to evaluation table
             user = db.session.query(User).filter_by(username=form.username.data).first()
+            workplan = db.session.query(WorkPlan).filter_by(Workplan_name=form.workplan_name.data).first()
             if user is None:
                 return render_template('noUserFound.html')
+            elif workplan is None:
+                return render_template('noWorkPlan.html')
             else:
+                workplanID = workplan.id
                 userID = user.id
                 #create evaluation object and add to table
-                evaluation = Evaluation(user=userID, rating=add_rating, rating1=rating1, rating2=rating2, rating3=rating3, finished_tasks=finished_tasks, finished_on_time=finished_on_time, add_review=add_review, date=date)
+                evaluation = Evaluation(user=userID, workplan_id=workplanID, rating=add_rating, rating1=rating1, rating2=rating2, rating3=rating3, finished_tasks=finished_tasks, finished_on_time=finished_on_time, add_review=add_review, date=date)
                 db.session.add(evaluation)
                 get_eval = db.session.query(Evaluation).filter_by(user=userID).first()
                 evalID = get_eval.id
