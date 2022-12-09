@@ -83,7 +83,7 @@ def evaluation():
 @login_required
 def view_evaluation():
     evaluations = Evaluation.query
-    return render_template('viewEvaluations.html')
+    return render_template('viewEvaluations.html', evaluations=evaluations)
 
 
 @app.route('/login',methods=['GET', 'POST'])
