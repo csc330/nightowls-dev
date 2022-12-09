@@ -2,17 +2,134 @@
 {% block content %}
 <head>
 	<style>
+	
 		.header{
 			color:#3d5a80;
 			text-align: center;
 		}
-	
-	
-	</style>
 
-</head>
+			td.EvaluationSideBar{
+				width: 200px;
+				text-align: center;
+				border: 4px solid lightblue;
+				background-color: lightblue;
+			}
+			
+		.box{
+			text-align: center;
+			border: 4px Solid LightGray;
+			background-color:LightGray;
+		}
+
+		td.part2{
+			width:1000px;
+		}
+
+		table{
+			text-align: center;
+			width: 100%;
+		}
+
+		input{
+			margin-left: 20px;
+			
+		}
+		
+	</style>
 	<h1 class="header"> Evaluation </h1>
 
+</head>
+
+</style>
+	
+
+<body>
+
+	<table class='box' border= "2">
+	
+	<tr><td class= "EvaluationSideBar">
+	<div class="text-center block1">
+	<h2> My Evaluations </h2>
+	 </div>
+	  <div class="text-center block2">
+	   {% if current_user.is_authenticated %}
+		<h2>{{ current_user.First_name }} {{ current_user.Last_name }}</h2>
+		{% endif %}
+	   <a class="link" href="/Name1">View My Evaluations</a>
+	    </div>
+			
+	
+
+	<td class="part2">
+	<div class="box">
+		<h1 class="header"> Create an Evaluation </h1>
+		<div class="wrapper">
+		<form action="" method="post" novalidate>
+			{{ form.hidden_tag() }}
+			<p>
+				{{ form.username.label(style='font-size: 20px;') }}<br>
+				{{ form.username(size=45, style='height: 25px;') }}
+			</p>
+
+			<p>	{{ form.workplan_name.label(style='font-size: 20px;') }}<br>
+				{{ form.workplan_name(size=45, style='height: 25px;') }}</p>
+			<br>
+
+			<h3>How many tasks did they finish?</h3>
+			<p>
+				{{ form.finished_tasks.label(style='font-size: 20px;') }}<br>
+				{{ form.finished_tasks(size=45, style='height: 25px;') }}
+			</p>
+			<h3>How many tasks did they finish on time?</h3>
+			<p>
+				{{ form.finished_on_time.label(style='font-size: 20px;') }}<br>
+				{{ form.finished_on_time(size=45, style='height: 25px;') }}
+			</p>
+
+			<div class="box">
+				<h4> Has this team member contributed in every team meeting? <br> 
+					And have they maintained communication throughout the project? </h4>
+				<input type="radio" name="question1" id="1" value="1"><label for="1">1</label>
+				<input type="radio" name="question1" id="2" value="2"><label for="2">2</label>
+				<input type="radio" name="question1" id="3" value="3"><label for="3">3</label>
+				<input type="radio" name="question1" id="4" value="4"><label for="4">4</label>
+				<input type="radio" name="question1" id="5" value="5"><label for="5">5</label>
+				
+				<h4> Has this team member submitted all their work on time? <br> 
+					And have they completed all their tasks? </h4>
+				<input type="radio" name="question2" id="1" value="1"><label for="1">1</label>
+				<input type="radio" name="question2" id="2" value="2"><label for="2">2</label>
+				<input type="radio" name="question2" id="3" value="3"><label for="3">3</label>
+				<input type="radio" name="question2" id="4" value="4"><label for="4">4</label>
+				<input type="radio" name="question2" id="5" value="5"><label for="5">5</label>
+
+				<h4> How would you rate the quality of this person work? </h4>
+				<input type="radio" name="question3" id="1" value="1"><label for="1">1</label>
+				<input type="radio" name="question3" id="2" value="2"><label for="2">2</label>
+				<input type="radio" name="question3" id="3" value="3"><label for="3">3</label>
+				<input type="radio" name="question3" id="4" value="4"><label for="4">4</label>
+				<input type="radio" name="question3" id="5" value="5"><label for="5">5</label>
+
+		 	</div>
+			<h3>Do you have any further comments about this person?</h3>
+			<p>	{{ form.add_review.label(style='font-size: 20px;') }}<br>
+				{{ form.add_review(size=45, style='height: 100px; width: 700px;') }}</p>
+			</p>
+			<h3> Add an overall rating from 1 to 5 </h3>
+			<p>	{{ form.add_rating.label(style='font-size: 20px;') }}<br>
+				{{ form.add_rating(size=45, style='height: 25px;') }}</p>
+			</p>
+			
+			<p>{{ form.submit(style='font-size: 20px; color: #3d5a80;') }}</p>
+	
+			<p> <a href = "/view_evaluations">View Evaluations </a> </p>
+
+			
+		</form>
+		</div>
+		</div>
+		</td></tr>
+	</body> 		
 		
 {% endblock %}
 

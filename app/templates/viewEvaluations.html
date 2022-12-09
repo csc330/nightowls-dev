@@ -1,0 +1,21 @@
+{% block content %}
+<head>
+  <title> View Submitted Evaluations </title>
+<body>
+  <h1 class = "header"> All Evaluations Submitted </h1>
+  <table border = "2px">
+    <tr>
+      <th> Your Evaluations</th>
+    </tr>
+    {% for evaluation in evaluations %}
+    <tr>
+      <td>{{ form.evaluation }} </td>
+      
+    </tr>
+    
+    {% endfor %}
+   
+  </table>
+</body>
+  
+    

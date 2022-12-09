@@ -1,0 +1,72 @@
+{% extends "NavBar.html" %}
+
+{% block content %}
+<head>
+
+	<title>View Groups </title>
+    <style>
+
+		table{
+			text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+            background-color: white;
+		}
+
+        .container {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .header{
+			color:#3d5a80;
+			text-align: center;
+		}
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            background-color: #2196F3;
+            padding: 10px;
+        }
+
+        .grid-item {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            font-size: 30px;
+            text-align: center;
+        }
+
+
+		
+	</style>
+
+</head>
+<body>
+    <h1 class="header"> View All Groups </h1>
+	<div class="container">
+    <table border="1px">
+        <tr>
+            <th> Group Number </th>
+            <th> Group Name </th>
+            <th> Members </th>
+        </tr>
+        {% for group in groups %}
+        <tr>
+            <td>{{ group.id }} </td>
+            <td>{{ group.groupName }}</td>
+            <td>{{ group.member }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+
+    <h3><a href="/add_to_group">Add Users to Groups</a></h3>
+    <h3><a href="/create_group">Create Groups</a></h3>
+    <h3><a href="/remove_from_group">Remove Users from Groups</a></h3>
+    </div>
+
+</body>
+{% endblock %}

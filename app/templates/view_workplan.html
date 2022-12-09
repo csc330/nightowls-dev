@@ -1,0 +1,24 @@
+{% extends "NavBar.html" %}
+<head>
+
+	<title> Workplan </title>
+
+</head>
+<body>
+    <h1> WorkPlan</h1>
+	<table>
+		<tr>
+			<th>Project</th>
+			<th> Info</th>
+		</tr>
+	{% for key,value in Work_plan.items() %}
+	    <tr>
+			<th>{{key}}</th>
+			<th>{{value}} </th>
+		</tr>
+		{% endfor %}
+
+	</table>
+
+</body>
+</html> 

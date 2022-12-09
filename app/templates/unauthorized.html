@@ -1,0 +1,27 @@
+{% extends "NavBar.html" %}
+{% block content %}
+<head>
+	<title> Unauthroized </title>
+	<style>
+    	.header{
+			color:#3d5a80;
+			text-align: center;
+		}
+
+		.box{
+        	border: 2px solid #3d5a80;
+        	border-radius: 25px;
+        	box-shadow: 15px 15px 10px #3d5a80;
+        	margin: auto;
+        	width: 50%;
+        	padding: 50px;
+    	}	
+    
+	</style>
+</head>
+
+   <div class="box">
+        <h2 class="header">Insufficient privileges to access this function. </h2>
+		<h3 class="header"><a href="/view_groups">Back to View Groups</a></h3>
+    </div>
+{% endblock %}

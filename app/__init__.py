@@ -33,7 +33,7 @@ login = LoginManager(app)
 login.login_view = 'login'
 
 from app import routes, models
-from app.models import User
+from app.models import User, Member, Group
 
 # Create DB schema
 db.create_all()
