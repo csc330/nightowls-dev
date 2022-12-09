@@ -29,6 +29,7 @@ class WorkPlanForm(FlaskForm):
 
 class EvaluationForm(FlaskForm):
     username = StringField("Username: ", validators = [DataRequired()])
+    workplan_name = StringField('WorkPlan Name: ', validators = [DataRequired()])
     finished_tasks = StringField("Finished Tasks: ", validators = [DataRequired()])
     finished_on_time = StringField('Finished on Time: ', validators=[DataRequired()])
     add_review = TextAreaField('Further Comments: ', validators = [DataRequired()])

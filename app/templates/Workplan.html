@@ -30,6 +30,8 @@
 			<form action="" method="post" novalidate>
 				{{ form.hidden_tag() }}
 			
+				<p>	{{ form.workplan_name.label(style='font-size: 20px;') }}<br>
+					{{ form.workplan_name(size=45, style='height: 25px; width: 200px;') }}</p>
 
 				<p>	{{ form.groupName.label(style='font-size: 20px;') }}<br>
 					{{ form.groupName(size=45, style='height: 25px; width: 200px;') }}</p>
