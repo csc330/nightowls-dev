@@ -19,21 +19,34 @@ def registerSuccess():
 
 
 @app.route('/workplan',methods=['GET', 'POST'])
+@login_required
 def workplan():
     form = WorkPlanForm()
-    if form.validate_on_submit():
-        Work_plan [form.goal_description.data] = form.WorkPlan.data
-        Work_plan [form.project_description.data] = form.WorkPlan.data
-        Work_plan [form.project_members.data] = form.WorkPlan.data
-        Work_plan [form.current_goals.data] = form.WorkPlan.data
-        Work_plan [form.nextphase_goals.data] = form.WorkPlan.data
-        form.goal_description.data = ''
-        form.project_description.data = ''
-        form.project_members.data = ''
-        form.current_goals.data = ''
-        form.nextphase_goals.data = ' '
-        return redirect(url_for('workplan'))
+    if request.method== 'POST':
+    
+        if form.validate_on_submit():
+            Workplan_name = form.WorkPlan_name.data
+            Goal1 =form.goal1.data
+            Goal2= form.goal2.data
+            Goal3= form.goal3.data 
+            start_date= form.start_date.data
+            end_date= form.end_date.data
+            groupName = form.groupName.data
+            group = Group.query.filter_by(groupName=form.groupName.data).first()
+            groupID = group.id
+            work_plan = WorkPlan(Workplan_name=Workplan_name, goal1=Goal1,goal2=Goal2, goal3=Goal3, start_date=start_date,end_date=end_date, group_id= groupID)
+        
+            db.session(work_plan)
+            db.commit()
+            return render_template('WorkPlanSuccess.html')
+        
+        
+        
+        else:
+       
+            return render_template('UnsuccessfulWorkplan.html')
     return render_template('Workplan.html', form=form)
+
 
 @app.route('/evaluation',methods=['GET', 'POST'])
 def evaluation():
