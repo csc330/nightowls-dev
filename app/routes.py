@@ -254,7 +254,8 @@ def is_admin():
     else:
         print('User not authenticated.', file=sys.stderr)
 
-app.route('/pie_graph')
+@app.route('/pie_graph')
+@login_required
 def pie_graph():
     xValues = []
     yValues = []
