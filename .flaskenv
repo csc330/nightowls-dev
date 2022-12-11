@@ -2,13 +2,7 @@ FLASK_APP=main.py
 FLASK_DEBUG=1
 FLASK_RUN_PORT=8080
 FLASK_RUN_HOST=0.0.0.0
-<<<<<<< HEAD
-MYSQL_IP='34.172.13.57'
-MYSQL_USER='root'
-MYSQL_PASS='1234'
-=======
 MYSQL_IP='35.184.1.250'
 MYSQL_USER='root'
 MYSQL_PASS='570Howard_1'
->>>>>>> c048a83 (added show password button to password field, added code for graphs)
 MYSQL_DB='nightowls-dev'
