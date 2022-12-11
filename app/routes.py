@@ -240,3 +240,9 @@ def is_admin():
             return False
     else:
         print('User not authenticated.', file=sys.stderr)
+
+app.route('/pie_graph')
+def pie_graph():
+    xValues = []
+    yValues = []
+    return render_template('pie.html', x=xValues, y=yValues)
