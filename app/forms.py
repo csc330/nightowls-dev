@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, url_for
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, SubmitField, StringField, PasswordField, BooleanField, TextAreaField, RadioField, DateField
+from wtforms import StringField, IntegerField, SubmitField, StringField, PasswordField, BooleanField, TextAreaField, RadioField, DateField, DateTimeField
 from wtforms.validators import DataRequired
 
 class LoginForm(FlaskForm):
@@ -22,8 +22,8 @@ class WorkPlanForm(FlaskForm):
     goal1 = TextAreaField('Goal 1:', validators = [DataRequired()])
     goal2 = TextAreaField('Goal 2:', validators = [DataRequired()])
     goal3 = TextAreaField('Goal 3:', validators = [DataRequired()])
-    start_date = DateField('Add Start Date: ', validators = [DataRequired()], format='%m-%d-%Y')
-    end_date = DateField('Add End Date: ', validators = [DataRequired()], format='%m-%d-%Y')
+    start_date = DateField('Add Start Date: ', validators = [DataRequired()], format='%Y-%m-%d')
+    end_date = DateField('Add End Date: ', validators = [DataRequired()], format='%Y-%m-%d')
     submit = SubmitField("Add a Workplan")
 
 

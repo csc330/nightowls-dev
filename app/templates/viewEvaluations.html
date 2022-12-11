@@ -1,3 +1,4 @@
+{% extends "NavBar.html" %}
 {% block content %}
 <head>
   <title> View Submitted Evaluations </title>
@@ -26,7 +27,7 @@
   <h1 class = "header"> All Evaluations Submitted </h1>
   <table border = "2px">
     <tr>
-      <th> Your Evaluations</th>
+      <th> All Evaluations</th>
     </tr>
     {% for evaluation in evaluations %}
     <tr>
@@ -38,5 +39,5 @@
    
   </table>
 </body>
-  
+{% endblock %}
     

@@ -1,6 +1,8 @@
 {% extends "NavBar.html" %}
 {% block content %}
 <head>
+	
+	<title> Workplan </title>
 	<style>
 		.header, h2{
 			color:#3d5a80;
@@ -16,18 +18,17 @@
 	
 	</style>
 
+
 </head>
 
 </style>
-	<title> Workplan </title>
-
-</head>
 
 	<h1 class="header"> Workplan</h1>
 	<div class="box">
 		<h1 class="header"> Add Workplan </h1>
 		<h2>Add Goals that you would like this teams to accomplish.</h2>
-			<form action="" method="post" novalidate>
+			
+		<form action="" method="post" novalidate>
 				{{ form.hidden_tag() }}
 			
 				<p>	{{ form.workplan_name.label(style='font-size: 20px;') }}<br>
@@ -61,7 +62,6 @@
 				<p><a href="/view_workplan">View Current Work Plan </a></p>
 		
 				
-			</form>
-		</div>
-</head> 		
+		</form>
+	</div>		
 {% endblock %}

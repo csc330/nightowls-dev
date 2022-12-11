@@ -47,10 +47,11 @@
 		</tr>
 		{% endfor %}
 	</table>
-
-    <h3><a href="/add_to_group">Add Users to Groups</a></h3>
-    <h3><a href="/create_group">Create Groups</a></h3>
-    <h3><a href="/remove_from_group">Remove Users from Groups</a></h3>
+    {% if current_user.role == 'admin' %}
+        <h3><a href="/add_to_group">Add Users to Groups</a></h3>
+        <h3><a href="/create_group">Create Groups</a></h3>
+        <h3><a href="/remove_from_group">Remove Users from Groups</a></h3>
+    {% endif %}
     </div>
 
 </body>

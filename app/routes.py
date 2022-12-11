@@ -20,30 +20,30 @@ def loginSuccess():
 @login_required
 def workplan():
     form = WorkPlanForm()
-    if request.method== 'POST':
-    
-        if form.validate_on_submit():
-            Workplan_name = form.WorkPlan_name.data
-            Goal1 =form.goal1.data
-            Goal2= form.goal2.data
-            Goal3= form.goal3.data 
-            start_date= form.start_date.data
-            end_date= form.end_date.data
-            groupName = form.groupName.data
-            group = Group.query.filter_by(groupName=form.groupName.data).first()
-            groupID = group.id
-            work_plan = WorkPlan(Workplan_name=Workplan_name, goal1=Goal1,goal2=Goal2, goal3=Goal3, start_date=start_date,end_date=end_date, group_id= groupID)
+    if is_admin():
+        if request.method== 'POST':
+            if form.validate_on_submit():
+                Workplan_name = form.workplan_name.data
+                Goal1 =form.goal1.data
+                Goal2= form.goal2.data
+                Goal3= form.goal3.data 
+                start_date= form.start_date.data
+                end_date= form.end_date.data
+                groupName = form.groupName.data
+
+                group = Group.query.filter_by(groupName=form.groupName.data).first()
+                groupID = group.id
+
+                work_plan = WorkPlan(Workplan_name=Workplan_name, goal1=Goal1, goal2=Goal2, goal3=Goal3, start_date=start_date, end_date=end_date, group_id=groupID)
         
-            db.session(work_plan)
-            db.commit()
-            return render_template('WorkPlanSuccess.html')
-        
-        
-        
-        else:
-       
-            return render_template('UnsuccessfulWorkplan.html')
-    return render_template('Workplan.html', form=form)
+                db.session.add(work_plan)
+                db.session.commit()
+                return render_template('WorkPlanSuccess.html')
+            else:
+                return render_template('unsuccessfulWorkplan.html')
+        return render_template('Workplan.html', form=form)
+    return render_template('unauthorized.html')
+
 
 
 @app.route('/evaluation',methods=['GET', 'POST'])
@@ -143,7 +143,7 @@ def register():
                 #get user id and create a new member in database
                 user = db.session.query(User).filter_by(username=form.username.data).first()
                 userID = user.id
-                member = Member(id=userID, group_id=None, eval_id=None, workplan_id=None)
+                member = Member(id=userID, group_id=None, eval_id=None)
                 db.session.add(member)
                 db.session.commit()
                 #will ask user to login to check their credentials

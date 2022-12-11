@@ -44,8 +44,8 @@ class WorkPlan(db.Model):
     goal1 = db.Column(db.String(200))
     goal2 = db.Column(db.String(200))
     goal3 = db.Column(db.String(200))
-    start_date = db.Column(db.String(64))
-    end_date = db.Column(db.String(64))
+    start_date = db.Column(db.DateTime)
+    end_date = db.Column(db.DateTime)
     group_id = db.Column(db.Integer, db.ForeignKey(Group.id))
 
 class Evaluation(db.Model):
@@ -68,6 +68,5 @@ class Member(db.Model):
      __tablename__ = 'member'
      id = db.Column(db.Integer, db.ForeignKey(User.id), primary_key=True)
      group_id = db.Column(db.Integer, db.ForeignKey(Group.id))
-     eval_id = db.Column(db.Integer,db.ForeignKey(Evaluation.id))
-     workplan_id = db.Column(db.Integer,db.ForeignKey(WorkPlan.id)) 
+     eval_id = db.Column(db.Integer,db.ForeignKey(Evaluation.id)) 
      
