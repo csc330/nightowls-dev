@@ -28,10 +28,6 @@ class User(UserMixin, db.Model):
 @login.user_loader
 def load_user(id):
     return db.session.query(User).get(int(id))
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/graphBranch
 
 class Group(db.Model):
     __tablename__ = 'group'
@@ -74,11 +70,4 @@ class Member(db.Model):
      group_id = db.Column(db.Integer, db.ForeignKey(Group.id))
      eval_id = db.Column(db.Integer,db.ForeignKey(Evaluation.id)) 
      
-<<<<<<< HEAD
-=======
-     
-     
 
-
-
->>>>>>> refs/remotes/origin/graphBranch
