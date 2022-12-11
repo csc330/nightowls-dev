@@ -1,6 +1,7 @@
 {% extends "NavBar.html" %}
 
 {% block content %}
+<head>
 <title>Login</title>
 
 <style>
@@ -27,6 +28,20 @@
 
 </style>
 
+<script>
+    function myFunction() {
+      var x = document.getElementById("myInput");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+
+</script>
+</head>
+
+
 <div class="box">
 <h1> Login Here</h1>
     <form action="" method="post" novalidate>
@@ -37,21 +52,11 @@
         </p>
         <p>
             {{ form.password.label(style='font-size: 20px;') }}<br>
-            <input type="password" value="" id="myInput" size=32, style='height: 25px'><br><br>
+            <input type="password" name="password" value="" id="myInput" size=32, style='height: 25px'><br><br>
             <input type="checkbox" onclick="myFunction()">Show Password
             
         </p>
-        <script>
-        function myFunction() {
-          var x = document.getElementById("myInput");
-          if (x.type === "password") {
-            x.type = "text";
-          } else {
-            x.type = "password";
-          }
-        }
-
-        </script>
+        
         <p>{{ form.submit(style='font-size: 20px; color: #3d5a80;') }}</p>
 
         <p><a href="/register">Need an Account?</a></p>

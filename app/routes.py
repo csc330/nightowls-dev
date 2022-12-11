@@ -110,7 +110,8 @@ def login():
         # check DB for user by username
         # have to create user
         user = db.session.query(User).filter_by(username=form.username.data).first()
-        valid_password = check_password_hash(user.password_hash, form.password.data)
+        password = request.form['password']
+        valid_password = check_password_hash(user.password_hash, password)
         if user is None or not valid_password:
             print('Login failed', file=sys.stderr)
             return render_template('unsuccessfulLogin.html', form=form)
