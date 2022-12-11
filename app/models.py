@@ -70,3 +70,4 @@ class Member(db.Model):
      group_id = db.Column(db.Integer, db.ForeignKey(Group.id))
      eval_id = db.Column(db.Integer,db.ForeignKey(Evaluation.id)) 
      
+
