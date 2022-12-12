@@ -95,7 +95,11 @@ def evaluation():
 @login_required
 def view_evaluation():
     evaluations = Evaluation.query
-    return render_template('viewEvaluations.html', evaluations=evaluations)
+    member = Member.query
+    rating1 = Rating1.query
+    rating2 = Rating2.query
+    rating3 = Rating3.query 
+    return render_template('viewEvaluations.html', evaluations=evaluations, member=member, rating1=rating1, rating2=rating2,rating3=rating3)
 
 
 @app.route('/login',methods=['GET', 'POST'])
