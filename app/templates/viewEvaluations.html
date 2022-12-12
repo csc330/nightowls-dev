@@ -27,11 +27,16 @@
   <h1 class = "header"> All Evaluations Submitted </h1>
   <table border = "2px">
     <tr>
-      <th> All Evaluations</th>
+      <th> Group Number </th>
+      <th> Members </td>
+      <th> Overall Rating </th>
     </tr>
     {% for evaluation in evaluations %}
     <tr>
       <td>{{ form.evaluation }} </td>
+      <td>{{ evaluation.id }} </td>
+      <td>{{ evaluation.member }} </td>
+      <td>{{ evaluation.rating }} </td>
       
     </tr>
     
