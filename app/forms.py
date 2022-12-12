@@ -14,6 +14,7 @@ class RegisterForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired()])
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
+    show_password = BooleanField('Show password', id='check')
     submit = SubmitField("Submit")
 
 class WorkPlanForm(FlaskForm):

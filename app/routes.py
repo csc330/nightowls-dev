@@ -257,6 +257,8 @@ def is_admin():
 @app.route('/pie_graph')
 @login_required
 def pie_graph():
-    xValues = []
-    yValues = []
+    user = User.query
+    evaluation = Evaluation.query
+    xValues = [User.username]
+    yValues = [Evaluation.rating1 + Evaluation.rating2 + Evaluation.rating3/3]
     return render_template('pie.html', x=xValues, y=yValues)

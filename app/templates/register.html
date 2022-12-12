@@ -4,6 +4,16 @@
 
 
 <title>Register</title>
+<script>
+function myFunction() {
+  var x = document.getElementById("myInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
 <style>
 
     h1 {
@@ -60,16 +70,6 @@
 		<input type="checkbox" onclick="myFunction()">Show Password
 		 		
 	</p>
-	<script>
-	function myFunction() {
-	  var x = document.getElementById("myInput");
-	  if (x.type === "password") {
-	    x.type = "text";
-	  } else {
-	    x.type = "password";
-	  }
-	}
-	</script>
 	<p> {{ form.submit(style='font-size: 15px; color: #3d5a80;') }} </p>
 	<p><a href="/login">Cancel</a></p>
 </form>
