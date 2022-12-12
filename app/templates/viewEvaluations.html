@@ -29,14 +29,18 @@
     <tr>
       <th> Group Number </th>
       <th> Members </td>
-      <th> Overall Rating </th>
+      <th> Rating 1 </th>
+      <th> Rating 2 </th>
+      <th> Rating 3 </th>
     </tr>
     {% for evaluation in evaluations %}
     <tr>
       <td>{{ form.evaluation }} </td>
       <td>{{ evaluation.id }} </td>
       <td>{{ evaluation.member }} </td>
-      <td>{{ evaluation.rating }} </td>
+      <td>{{ evaluation.rating1 }} </td>
+      <td>{{ evaluation.rating2 }} </td>
+      <td>{{ evaluation.rating3 }} </td>
       
     </tr>
     
