@@ -57,7 +57,6 @@ class Evaluation(db.Model):
     rating2 = db.Column(db.Integer())
     rating3 = db.Column(db.Integer())
     finished_tasks = db.Column(db.String(64), default=False)
-    finished_on_time= db.Column(db.String(64), default=False)
     add_review = db.Column(db.String(64))
     date = db.Column(db.DateTime)
     workplan_id = db.Column(db.Integer,db.ForeignKey(WorkPlan.id))

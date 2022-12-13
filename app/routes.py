@@ -59,7 +59,6 @@ def evaluation():
             user = form.username.data
             workplan_name = form.workplan_name.data
             finished_tasks = form.finished_tasks.data
-            finished_on_time = form.finished_on_time.data
             rating1 = request.form['question1']
             rating2 = request.form['question2']
             rating3 = request.form['question3']
@@ -80,7 +79,7 @@ def evaluation():
                 group = workplan.group_name
 
                 #create evaluation object and add to table
-                evaluation = Evaluation(group_name=group, user=username, workplan_id=workplanID, rating=add_rating, rating1=rating1, rating2=rating2, rating3=rating3, finished_tasks=finished_tasks, finished_on_time=finished_on_time, add_review=add_review, date=date)
+                evaluation = Evaluation(group_name=group, user=username, workplan_id=workplanID, rating=add_rating, rating1=rating1, rating2=rating2, rating3=rating3, finished_tasks=finished_tasks, add_review=add_review, date=date)
                 db.session.add(evaluation)
                 #commit to database
                 db.session.commit()
