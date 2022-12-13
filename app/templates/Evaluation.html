@@ -49,13 +49,12 @@
 	
 	<tr><td class= "EvaluationSideBar">
 	<div class="text-center block1">
-	<h2> My Evaluations </h2>
+	<h2> Evaluations </h2>
 	 </div>
 	  <div class="text-center block2">
 	   {% if current_user.is_authenticated %}
 		<h2>{{ current_user.First_name }} {{ current_user.Last_name }}</h2>
 		{% endif %}
-	   <a class="link" href="/pie_graph">View My Evaluation Data</a>
 	    </div>
 			
 	
