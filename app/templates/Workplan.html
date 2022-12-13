@@ -4,7 +4,7 @@
 	
 	<title> Workplan </title>
 	<style>
-		.header, h2{
+		.header, h2, h3{
 			color:#3d5a80;
 			text-align: center;
 		}
@@ -27,6 +27,7 @@
 	<div class="box">
 		<h1 class="header"> Add Workplan </h1>
 		<h2>Add Goals that you would like this teams to accomplish.</h2>
+		<h3><a href="/viewworkplan">View All WorkPlans </a></h3>
 			
 		<form action="" method="post" novalidate>
 				{{ form.hidden_tag() }}
@@ -58,8 +59,8 @@
 
 				
 
-				<p>{{ form.submit(style='font-size: 20px; color: #3d5a80;') }}</p>
-				<p><a href="/view_workplan">View Current Work Plan </a></p>
+				<p>{{ form.submit(style='font-size: 25px; color: #3d5a80;') }}</p>
+				
 		
 				
 		</form>
