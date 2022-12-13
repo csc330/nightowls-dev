@@ -261,23 +261,30 @@ def pie_graph():
     rating2 = db.session.query(Evaluation.rating2).all()
     rating3 = db.session.query(Evaluation.rating3).all()
     overall = db.session.query(Evaluation.rating).all()
-    user = db.session.query(Evaluation.user).all()
 
-
-
-    xValues = [value for value, in user]
+    xValues = ['Question 1', 'Question 2', 'Question 3']
     print(xValues)
 
-    yValues1 = [value for value, in rating1]
+    l1 = [value for value, in rating1]
+    yValues1 = sum(l1)
     print(yValues1)
 
-    yValues2 = [value for value, in rating2]
+    l2 = [value for value, in rating2]
+    yValues2 = sum(l2)
     print(yValues2)
 
-    yValues3 = [value for value, in rating3]
+    l3 = [value for value, in rating3]
+    yValues3 = sum(l3)
     print(yValues3)
 
-    yValues4 = [value for value, in overall]
+    l4 = [value for value, in overall]
+    yValues4 = sum(l4)
     print(yValues4)
 
-    return render_template('pie.html', xValues=xValues, yValues1=yValues1, yValues2=yValues2, yValues3=yValues3, yValues4=yValues4)
+    yValues = []
+    yValues.append(yValues1)
+    yValues.append(yValues2)
+    yValues.append(yValues3)
+
+
+    return render_template('pie.html', xValues=xValues, yValues=yValues)
