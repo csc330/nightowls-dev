@@ -2,6 +2,7 @@ from app import app
 from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import func
 from werkzeug.security import check_password_hash, generate_password_hash
 from app.forms import LoginForm, RegisterForm, WorkPlanForm
 from app.forms import LoginForm, RegisterForm, CreateGroupForm, AddToGroupForm, RemoveFromGroupForm, EvaluationForm, WorkPlanForm
@@ -31,14 +32,16 @@ def workplan():
                 end_date= form.end_date.data
                 groupName = form.groupName.data
 
-                group = Group.query.filter_by(groupName=form.groupName.data).first()
-                groupID = group.id
 
-                work_plan = WorkPlan(Workplan_name=Workplan_name, goal1=Goal1, goal2=Goal2, goal3=Goal3, start_date=start_date, end_date=end_date, group_id=groupID)
-        
-                db.session.add(work_plan)
-                db.session.commit()
-                return render_template('WorkPlanSuccess.html')
+                group = db.session.query(Group).filter_by(groupName=form.groupName.data).first()
+                if group is None:
+                    return render_template('groupNotFound_WP.html')
+                else:
+                    group_name = group.groupName
+                    work_plan = WorkPlan(Workplan_name=Workplan_name, goal1=Goal1, goal2=Goal2, goal3=Goal3, start_date=start_date, end_date=end_date, group_name=group_name)
+                    db.session.add(work_plan)
+                    db.session.commit()
+                    return render_template('WorkPlanSuccess.html')
             else:
                 return render_template('unsuccessfulWorkplan.html')
         return render_template('Workplan.html', form=form)
@@ -73,16 +76,12 @@ def evaluation():
                 return render_template('noWorkPlan.html')
             else:
                 workplanID = workplan.id
-                userID = user.id
+                username = user.username
+                group = workplan.group_name
+
                 #create evaluation object and add to table
-                evaluation = Evaluation(user=userID, workplan_id=workplanID, rating=add_rating, rating1=rating1, rating2=rating2, rating3=rating3, finished_tasks=finished_tasks, finished_on_time=finished_on_time, add_review=add_review, date=date)
+                evaluation = Evaluation(group_name=group, user=username, workplan_id=workplanID, rating=add_rating, rating1=rating1, rating2=rating2, rating3=rating3, finished_tasks=finished_tasks, finished_on_time=finished_on_time, add_review=add_review, date=date)
                 db.session.add(evaluation)
-                get_eval = db.session.query(Evaluation).filter_by(user=userID).first()
-                evalID = get_eval.id
-                members = Member.query
-                for member in members:
-                    if user.id == member.id:
-                        member.eval_id=evalID
                 #commit to database
                 db.session.commit()
                 return render_template('evalSuccess.html')
@@ -95,11 +94,7 @@ def evaluation():
 @login_required
 def view_evaluation():
     evaluations = Evaluation.query
-    member = Member.query
-    rating1 = Rating1.query
-    rating2 = Rating2.query
-    rating3 = Rating3.query 
-    return render_template('viewEvaluations.html', evaluations=evaluations, member=member, rating1=rating1, rating2=rating2,rating3=rating3)
+    return render_template('viewEvaluations.html', evaluations=evaluations)
 
 
 @app.route('/login',methods=['GET', 'POST'])
@@ -139,7 +134,7 @@ def register():
                 Last_name = form.last_name.data
                 username = form.username.data
                 email = form.email.data
-                password = form.password.data
+                password = request.form['password']
                 role = 'user'
                 #create user and add to database
                 user = User(First_name=First_name, Last_name=Last_name, email=email, username=username, role=role)
@@ -147,8 +142,8 @@ def register():
                 db.session.add(user)
                 #get user id and create a new member in database
                 user = db.session.query(User).filter_by(username=form.username.data).first()
-                userID = user.id
-                member = Member(id=userID, group_id=None, eval_id=None)
+                userID = user.username
+                member = Member(member_id=userID, group_id=None, eval_id=None)
                 db.session.add(member)
                 db.session.commit()
                 #will ask user to login to check their credentials
@@ -167,7 +162,9 @@ def logout():
 @app.route('/viewworkplan')
 @login_required
 def viewworkplan():
-    return render_template('view_workplan.html')
+    workplan = WorkPlan.query
+    member = Member.query
+    return render_template('view_workplan.html', workplan=workplan, member=member)
 
 @app.route('/create_group', methods=['GET', 'POST'])
 @login_required
@@ -204,11 +201,10 @@ def add_to_group():
             groupID = group.id
             #get the user id
             user = User.query.filter_by(username=username).first()
-            userID = user.id
             members = Member.query
             for member in members:
-                if user.id == member.id:
-                    member.group_id=group.id
+                if user.username == member.member_id:
+                    member.group_id=group.groupName
                 db.session.commit()
             return redirect(url_for('view_groups'))
         return render_template('AddToGroup.html', form=form)
@@ -242,9 +238,8 @@ def remove_from_group():
 @login_required
 def view_groups():
     groups = Group.query
-    members = Member.query
-    user = User.query
-    return render_template('ViewGroups.html', groups=groups, members=members, user=user)
+    member = Member.query
+    return render_template('ViewGroups.html', groups=groups, member=member)
 
 def is_admin():
     '''
@@ -261,8 +256,28 @@ def is_admin():
 @app.route('/pie_graph')
 @login_required
 def pie_graph():
-    user = User.query
     evaluation = Evaluation.query
-    xValues = [User.username]
-    yValues = [Evaluation.rating1 + Evaluation.rating2 + Evaluation.rating3/3]
-    return render_template('pie.html', x=xValues, y=yValues)
+    rating1 = db.session.query(Evaluation.rating1).all()
+    rating2 = db.session.query(Evaluation.rating2).all()
+    rating3 = db.session.query(Evaluation.rating3).all()
+    overall = db.session.query(Evaluation.rating).all()
+    user = db.session.query(Evaluation.user).all()
+
+
+
+    xValues = [value for value, in user]
+    print(xValues)
+
+    yValues1 = [value for value, in rating1]
+    print(yValues1)
+
+    yValues2 = [value for value, in rating2]
+    print(yValues2)
+
+    yValues3 = [value for value, in rating3]
+    print(yValues3)
+
+    yValues4 = [value for value, in overall]
+    print(yValues4)
+
+    return render_template('pie.html', xValues=xValues, yValues1=yValues1, yValues2=yValues2, yValues3=yValues3, yValues4=yValues4)

@@ -49,6 +49,7 @@
 
 </style>
 
+
 </head>
 
 <body>
@@ -59,13 +60,16 @@
 		{% else %}
 		<a class="nav-link" href="/login">Logout</a>
 		{% endif %}
-		<a class="nav-link" href="/workplan">Work Plan</a>
-	
-		<a class="nav-link" href="/evaluation">Evaluation</a>
+		<a class="nav-link" href="/viewworkplan">WorkPlan</a>
+
+		<a class="nav-link" href="/view_evaluations">Evaluation</a>
 
 		<a class="nav-link" href="/view_groups">Groups</a>
 				
 	</div>
-	{% block content %}{% endblock %}
+	{% block content %}
+	
+	{% endblock %}
+
 </body>
 </html>

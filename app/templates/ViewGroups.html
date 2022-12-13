@@ -25,6 +25,9 @@
 			text-align: center;
 		}
 
+        th,td {
+      padding: 10px;
+    }
 
 		
 	</style>
@@ -32,7 +35,12 @@
 </head>
 <body>
     <h1 class="header"> View All Groups </h1>
-	<div class="container">
+	{% for member in member %}
+        {% if current_user.username == member.member_id %}
+        <h2 class="header">You are in {{ member.group_id }}</h2>
+        {% endif %}
+    {% endfor %}
+    <div class="container">
     <table border="1px">
         <tr>
             <th> Group Number </th>
