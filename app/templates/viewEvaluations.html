@@ -2,24 +2,83 @@
 {% block content %}
 <head>
   <title> View Submitted Evaluations </title>
+<<<<<<< HEAD
   
 </head>
+=======
+  <style>
+    .header {
+      color: #3d5a80;
+      text-align: center;
+    }
+    table {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+      width: 60%;
+    }
+    th,td {
+      padding: 10px;
+    }
+
+    .container {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+  </style>
+</head>
+
+>>>>>>> efa872b38372fd8c32c2165a505fa4e83077271d
 <body>
+  {% if current_user.role == 'admin' %}
   <h1 class = "header"> All Evaluations Submitted </h1>
+  {% else %}
+  <h1 class = "header"> Your Evaluations </h1>
+  <h3 class="header"> All Evaluations are anonymous </h3>
+  {% endif %}
   <table border = "2px">
     <tr>
-      <th> Your Evaluations</th>
+      <th> Username </th>
+      <th> Group Name </th>
+      <th> Has this team member contributed in every team meeting? 
+        And have they maintained communication throughout the project?      </th>
+      <th>Has this team member submitted all their work on time? 
+        And have they completed all their tasks? </th>
+      <th> How would you rate the quality of this person work? </th>
     </tr>
+    {% if current_user.role == 'admin' %}
+      {% for evaluation in evaluations %}
+      <tr>
+        <td>{{ evaluation.user }} </td>
+        <td>{{ evaluation.group_name }} </td>
+        <td>{{ evaluation.rating1 }} </td>
+        <td>{{ evaluation.rating2 }} </td>
+        <td>{{ evaluation.rating3 }} </td>
+      </tr>
+      {% endfor %}
+    {% else %}
     {% for evaluation in evaluations %}
+      {% if current_user.username == evaluation.user %}
     <tr>
-      <td>{{ form.evaluation }} </td>
-      
+      <td>{{ evaluation.user }} </td>
+      <td>{{ evaluation.group_name }} </td>
+      <td>{{ evaluation.rating1 }} </td>
+      <td>{{ evaluation.rating2 }} </td>
+      <td>{{ evaluation.rating3 }} </td>
     </tr>
-    
+    {% endif %}
     {% endfor %}
+    {% endif %}
    
   </table>
+  <h3 class="header"><a href="/evaluation"> Submit a new Evaluation </a></h3>
+  <h3 class="header"><a href="/pie_graph">View Evaluation Data</a></h3>
 </body>
 {% endblock %}
+<<<<<<< HEAD
   
+=======
+>>>>>>> efa872b38372fd8c32c2165a505fa4e83077271d
     

@@ -1,24 +1,68 @@
 {% extends "NavBar.html" %}
+{% block content %}
 <head>
+  <title> View Work Plan </title>
+  <style>
+    .header {
+      color: #3d5a80;
+      text-align: center;
+    }
+    table {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+      width: 60%
+      
+    }
+    .container {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-	<title> Workplan </title>
-
+    th,td {
+      padding: 10px;
+    }
+    
+  </style>
 </head>
+
 <body>
-    <h1> WorkPlan</h1>
-	<table>
-		<tr>
-			<th>Project</th>
-			<th> Info</th>
-		</tr>
-	{% for key,value in Work_plan.items() %}
-	    <tr>
-			<th>{{key}}</th>
-			<th>{{value}} </th>
-		</tr>
-		{% endfor %}
+  <h1 class = "header"> Team WorkPlans </h1>
+  <h3 class="header"> These are goals and milestones that have been listed for teams </h3>
+  <br>
+  {% for member in member %}
+    {% if current_user.username == member.member_id %}
+    <h2 class="header">You are in {{ member.group_id }}</h2>
+    {% endif %}
+  {% endfor %}
+  <table border = "1px">
+    <tr>
+      <th> WorkPlan Name </th>
+      <th> Group Name </th>
+      <th> Start Date </th>
+      <th> End Date </th>
+      <th> Goal 1 </th>
+      <th> Goal 2 </th>
+      <th> Goal 3 </th>
+    </tr>
 
-	</table>
-
+    {% for Workplan in workplan %}
+    <tr>
+        <td>{{ Workplan.Workplan_name }} </td>
+        <td>{{ Workplan.group_name }}</td>  
+        <td>{{ Workplan.start_date }}</td>
+        <td>{{ Workplan.end_date }}</td>     
+        <td>{{ Workplan.goal1 }} </td>
+        <td>{{ Workplan.goal2 }} </td>
+        <td>{{ Workplan.goal3 }} </td>
+    </tr>
+    {% endfor %}
+   
+  </table>
+  {% if current_user.role == 'admin' %}
+  <h3 class="header"><a href="/workplan">Add a New Work Plan </a></h3>
+  {% endif %}
 </body>
-</html> 
+{% endblock %}
+    

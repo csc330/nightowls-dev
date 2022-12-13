@@ -1,0 +1,174 @@
+{% extends "NavBar.html" %}
+{% block content %}
+<style>
+  .box{
+			text-align: center;
+			border: 4px Solid LightGray;
+			background-color:LightGray;
+      margin-left: auto;
+      margin-right: auto;
+      width: 60%;
+    }
+    .header {
+      color: #3d5a80;
+      text-align: center;
+    }
+    .grid {
+      height: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(150px, 2fr));
+      grid-template-rows: repeat(2, minmax(150px, 2fr));
+      border: #3d5a80 2px solid;
+      margin: auto;
+    }
+
+    .player {
+      border: #3d5a80 2px solid;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+    }
+</style>
+
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+  <div class="grid">
+    <div class="player">
+      <h1 class="header"> User's Question 1 Rating </h1>
+        <canvas class="box" id="myChart1" style="width:100%;max-width:500px"></canvas>
+
+        <script>
+          var xValues = {{ xValues|safe }};
+          var yValues1 = {{ yValues1 }};
+          var barColors = [
+            "#b91d47",
+            "#00aba9",
+            "#2b5797",
+            "#e8c3b9",
+            "#1e7145"
+          ];
+          
+          new Chart("myChart1", {
+            type: "pie",
+            data: {
+              labels: xValues,
+              datasets: [{
+                backgroundColor: barColors,
+                data: yValues1
+              }]
+            },
+            options: {
+              title: {
+                display: true,
+                text: ""
+              }
+            }
+          });
+          </script>
+
+    </div>
+    <div class="player">
+      <h1 class="header"> User's Question 2 Rating </h1>
+        <canvas class="box" id="myChart2" style="width:100%;max-width:500px"></canvas>
+
+        <script>
+          var xValues = {{ xValues|safe }};
+          var yValues2 = {{ yValues2 }};
+          var barColors = [
+            "#b91d47",
+            "#00aba9",
+            "#2b5797",
+            "#e8c3b9",
+            "#1e7145"
+          ];
+          
+          new Chart("myChart2", {
+            type: "pie",
+            data: {
+              labels: xValues,
+              datasets: [{
+                backgroundColor: barColors,
+                data: yValues2
+              }]
+            },
+            options: {
+              title: {
+                display: true,
+                text: ""
+              }
+            }
+          });
+          </script>
+    </div>
+    <div class="player">
+      <h1 class="header"> User's Question 3 Rating </h1>
+        <canvas class="box" id="myChart3" style="width:100%;max-width:500px"></canvas>
+
+        <script>
+          var xValues = {{ xValues|safe }};
+          var yValues3 = {{ yValues3 }};
+          var barColors = [
+            "#b91d47",
+            "#00aba9",
+            "#2b5797",
+            "#e8c3b9",
+            "#1e7145"
+          ];
+          
+          new Chart("myChart3", {
+            type: "pie",
+            data: {
+              labels: xValues,
+              datasets: [{
+                backgroundColor: barColors,
+                data: yValues2
+              }]
+            },
+            options: {
+              title: {
+                display: true,
+                text: ""
+              }
+            }
+          });
+          </script>
+    </div>
+    <div class="player">
+      <h1 class="header"> Overall User's Rating </h1>
+        <canvas class="box" id="myChart4" style="width:100%;max-width:500px"></canvas>
+
+        <script>
+          var xValues = {{ xValues|safe }};
+          var yValues4 = {{ yValues4 }};
+          var barColors = [
+            "#b91d47",
+            "#00aba9",
+            "#2b5797",
+            "#e8c3b9",
+            "#1e7145"
+          ];
+          
+          new Chart("myChart4", {
+            type: "pie",
+            data: {
+              labels: xValues,
+              datasets: [{
+                backgroundColor: barColors,
+                data: yValues4
+              }]
+            },
+            options: {
+              title: {
+                display: true,
+                text: ""
+              }
+            }
+          });
+          </script>
+    </div>
+  </div>
+
+</body>
+{% endblock %}
