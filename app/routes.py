@@ -269,10 +269,10 @@ def is_admin():
 @login_required
 def graph():
     evaluation = Evaluation.query
-    rating1 = db.session.query(Evaluation.rating1).all()
-    rating2 = db.session.query(Evaluation.rating2).all()
-    rating3 = db.session.query(Evaluation.rating3).all()
-    overall = db.session.query(Evaluation.rating).all()
+    rating1 = db.session.query(Evaluation.rating1).filter(Evaluation.user == current_user.username).all()
+    rating2 = db.session.query(Evaluation.rating2).filter(Evaluation.user == current_user.username).all()
+    rating3 = db.session.query(Evaluation.rating3).filter(Evaluation.user == current_user.username).all()
+    overall = db.session.query(Evaluation.rating).filter(Evaluation.user == current_user.username).all()
     
     user = User.query
     rows = db.session.query(User.username).join(Evaluation).filter(Evaluation.user == current_user.username ).count()
@@ -310,16 +310,40 @@ def graph():
 @login_required
 def graph_admin():
     evaluation = Evaluation.query
-    user = db.session.query(Evaluation.user).all()
+    rating1 = db.session.query(Evaluation.rating1).all()
+    rating2 = db.session.query(Evaluation.rating2).all()
+    rating3 = db.session.query(Evaluation.rating3).all()
     overall = db.session.query(Evaluation.rating).all()
+    group = db.session.query(Group.groupName).all()
+    
+    user = User.query
+    rows = db.session.query(Group.groupName).join(Evaluation).filter(Evaluation.group_name == Evaluation.group_name).count()
 
-    xValues = [value for value, in user]
-    print(xValues)
+    if rows == 0:
+        return redirect(url_for('view_evaluation'))
+    else:
+        xValues = ['Question 1', 'Question 2', 'Question 3']
+        print(xValues)
 
-    l4 = [value for value, in overall]
+        l1 = [value for value, in rating1]
+        yValues1 = sum(l1)/rows
+        print(yValues1)
 
-    yValues = []
-    for i in l4:
-        yValues.append(i)
+        l2 = [value for value, in rating2]
+        yValues2 = sum(l2)/rows 
+        print(yValues2)
+
+        l3 = [value for value, in rating3]
+        yValues3 = sum(l3)/rows
+        print(yValues3)
+
+        l4 = [value for value, in overall]
+        yValues4 = sum(l4)
+        print(yValues4)
+
+        yValues = []
+        yValues.append(yValues1)
+        yValues.append(yValues2)
+        yValues.append(yValues3)
     
     return render_template('graph.html', xValues=xValues, yValues=yValues)
