@@ -12,6 +12,8 @@ import datetime
 import sys
 
 
+
+
 @app.route('/success')
 def loginSuccess():
     return render_template('loginSuccess.html')
@@ -260,20 +262,25 @@ def pie_graph():
     rating2 = db.session.query(Evaluation.rating2).all()
     rating3 = db.session.query(Evaluation.rating3).all()
     overall = db.session.query(Evaluation.rating).all()
+    
 
+    rows = db.session.query(User.username).join(Evaluation).filter(Evaluation.user =='srichardson').count()
+    
+    
+    
     xValues = ['Question 1', 'Question 2', 'Question 3']
     print(xValues)
 
     l1 = [value for value, in rating1]
-    yValues1 = sum(l1)
+    yValues1 = sum(l1)/rows
     print(yValues1)
 
     l2 = [value for value, in rating2]
-    yValues2 = sum(l2)
+    yValues2 = sum(l2)/rows 
     print(yValues2)
 
     l3 = [value for value, in rating3]
-    yValues3 = sum(l3)
+    yValues3 = sum(l3)/rows
     print(yValues3)
 
     l4 = [value for value, in overall]
