@@ -48,9 +48,12 @@ if user is None:
 
 user = User.query.filter_by(username='user').first()
 if user is None:
+    username = 'user'
     reg_user = User(username='user', role = 'user')
     reg_user.set_password('csc330')
     db.session.add(reg_user)
+    member = Member(member_id=username, group_id=None, eval_id=None)
+    db.session.add(member)
     db.session.commit()
 
 
