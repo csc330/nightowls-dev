@@ -199,15 +199,20 @@ def add_to_group():
             username = form.username.data
             #get group name and id from database
             group = Group.query.filter_by(groupName=form.groupName.data).first()
-            groupID = group.id
-            #get the user id
+            #get the user
             user = User.query.filter_by(username=username).first()
-            members = Member.query
-            for member in members:
-                if user.username == member.member_id:
-                    member.group_id=group.groupName
-                db.session.commit()
-            return redirect(url_for('view_groups'))
+            if user is None:
+                return render_template('userNotFound_G.html')
+            elif group is None:
+                return render_template('groupNotFound_G.html')
+            else:
+                groupID = group.id
+                members = Member.query
+                for member in members:
+                    if user.username == member.member_id:
+                        member.group_id=group.groupName
+                    db.session.commit()
+                return redirect(url_for('view_groups'))
         return render_template('AddToGroup.html', form=form)
     return render_template('unauthorized.html')
 
@@ -222,16 +227,22 @@ def remove_from_group():
             username = form.username.data
             #get group name and id from database
             group = Group.query.filter_by(groupName=form.groupName.data).first()
-            groupID = group.id
+
             #set users groupID to none, this removes the groupID
             user = User.query.filter_by(username=username).first()
-            userID = user.id
-            members = Member.query
-            for member in members:
-                if user.id == member.id:
-                    member.group_id=None
-            db.session.commit()
-            return redirect(url_for('view_groups'))
+            if user is None:
+                return render_template('userNotFound_G.html')
+            elif group is None:
+                return render_template('groupNotFound_G.html')
+            else:
+                groupID = group.id
+                userID = user.username
+                members = Member.query
+                for member in members:
+                    if user.username == member.member_id:
+                        member.group_id=None
+                db.session.commit()
+                return redirect(url_for('view_groups'))
         return render_template('RemoveFromGroup.html', form=form)
     return render_template('unauthorized.html')
 

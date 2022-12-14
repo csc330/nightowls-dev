@@ -33,7 +33,11 @@
   <br>
   {% for member in member %}
     {% if current_user.username == member.member_id %}
-    <h2 class="header">You are in {{ member.group_id }}</h2>
+      {% if member.group_id == None %}
+      <h2 class="header">You are not in a Group yet</h2>
+      {% else %}
+      <h2 class="header">You are in {{ member.group_id }}</h2>
+      {% endif %}
     {% endif %}
   {% endfor %}
   <table border = "1px">
