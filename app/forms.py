@@ -33,7 +33,6 @@ class EvaluationForm(FlaskForm):
     workplan_name = StringField('WorkPlan Name: ', validators = [DataRequired()])
     finished_tasks = StringField("Finished Tasks: ", validators = [DataRequired()])
     add_review = TextAreaField('Further Comments: ', validators = [DataRequired()])
-    add_rating = StringField('Overall Rating: ', validators = [DataRequired()])
     submit = SubmitField("Submit")
 
 

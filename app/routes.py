@@ -66,7 +66,7 @@ def evaluation():
             rating3 = request.form['question3']
             date = datetime.datetime.now()
             add_review = form.add_review.data
-            add_rating = form.add_rating.data
+            add_rating = request.form['overall']
 
             #get user id to add to evaluation table
             user = db.session.query(User).filter_by(username=form.username.data).first()
@@ -265,43 +265,61 @@ def is_admin():
     else:
         print('User not authenticated.', file=sys.stderr)
 
-@app.route('/pie_graph')
+@app.route('/graph')
 @login_required
-def pie_graph():
+def graph():
     evaluation = Evaluation.query
     rating1 = db.session.query(Evaluation.rating1).all()
     rating2 = db.session.query(Evaluation.rating2).all()
     rating3 = db.session.query(Evaluation.rating3).all()
     overall = db.session.query(Evaluation.rating).all()
     
+    user = User.query
+    rows = db.session.query(User.username).join(Evaluation).filter(Evaluation.user == current_user.username ).count()
 
-    rows = db.session.query(User.username).join(Evaluation).filter(Evaluation.user =='srichardson').count()
-    
-    
-    
-    xValues = ['Question 1', 'Question 2', 'Question 3']
+    if rows == 0:
+        return redirect(url_for('view_evaluation'))
+    else:
+        xValues = ['Question 1', 'Question 2', 'Question 3']
+        print(xValues)
+
+        l1 = [value for value, in rating1]
+        yValues1 = sum(l1)/rows
+        print(yValues1)
+
+        l2 = [value for value, in rating2]
+        yValues2 = sum(l2)/rows 
+        print(yValues2)
+
+        l3 = [value for value, in rating3]
+        yValues3 = sum(l3)/rows
+        print(yValues3)
+
+        l4 = [value for value, in overall]
+        yValues4 = sum(l4)
+        print(yValues4)
+
+        yValues = []
+        yValues.append(yValues1)
+        yValues.append(yValues2)
+        yValues.append(yValues3)
+
+    return render_template('graph.html', xValues=xValues, yValues=yValues)
+
+@app.route('/graph_admin')
+@login_required
+def graph_admin():
+    evaluation = Evaluation.query
+    user = db.session.query(Evaluation.user).all()
+    overall = db.session.query(Evaluation.rating).all()
+
+    xValues = [value for value, in user]
     print(xValues)
 
-    l1 = [value for value, in rating1]
-    yValues1 = sum(l1)/rows
-    print(yValues1)
-
-    l2 = [value for value, in rating2]
-    yValues2 = sum(l2)/rows 
-    print(yValues2)
-
-    l3 = [value for value, in rating3]
-    yValues3 = sum(l3)/rows
-    print(yValues3)
-
     l4 = [value for value, in overall]
-    yValues4 = sum(l4)
-    print(yValues4)
 
     yValues = []
-    yValues.append(yValues1)
-    yValues.append(yValues2)
-    yValues.append(yValues3)
-
-
-    return render_template('pie.html', xValues=xValues, yValues=yValues)
+    for i in l4:
+        yValues.append(i)
+    
+    return render_template('graph.html', xValues=xValues, yValues=yValues)

@@ -82,7 +82,11 @@
    
   </table>
   <h3 class="header"><a href="/evaluation"> Submit a new Evaluation </a></h3>
-  <h3 class="header"><a href="/pie_graph">View Evaluation Data</a></h3>
+  {% if current_user.role == "admin" %}
+  <h3 class="header"><a href="/graph_admin">View Evaluation Data</a></h3>
+  {% else %}
+  <h3 class="header"><a href="/graph">View Evaluation Data</a></h3>
+  {% endif %}
 </body>
 {% endblock %}
     

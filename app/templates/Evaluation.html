@@ -110,9 +110,11 @@
 				{{ form.add_review(size=45, style='height: 100px; width: 700px;') }}</p>
 			</p>
 			<h3> Add an overall rating from 1 to 5 </h3>
-			<p>	{{ form.add_rating.label(style='font-size: 20px;') }}<br>
-				{{ form.add_rating(size=45, style='height: 25px;') }}</p>
-			</p>
+				<input type="radio" name="overall" id="1" value="1"><label for="1">1</label>
+				<input type="radio" name="overall" id="2" value="2"><label for="2">2</label>
+				<input type="radio" name="overall" id="3" value="3"><label for="3">3</label>
+				<input type="radio" name="overall" id="4" value="4"><label for="4">4</label>
+				<input type="radio" name="overall" id="5" value="5"><label for="5">5</label>
 			
 			<p>{{ form.submit(style='font-size: 20px; color: #3d5a80;') }}</p>
 	

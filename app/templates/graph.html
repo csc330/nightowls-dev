@@ -19,7 +19,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
     <div class="player">
+      {% if current_user.role == 'admin' %}
+      <h1 class="header"> Overall Rating of Each Evaluation and User </h1>
+      {% else %}
       <h1 class="header"> Average Ratings Per Question </h1>
+      {% endif %}
         <canvas class="box" id="myChart1" style="width:100%;max-width:1000px"></canvas>
 
         <script>
@@ -34,7 +38,7 @@
           ];
           
           new Chart("myChart1", {
-            type: "pie",
+            type: "bar",
             data: {
               labels: xValues,
               datasets: [{
@@ -43,12 +47,19 @@
               }]
             },
             options: {
+              legend: {display: false},
               title: {
                 display: true,
                 text: ""
-              }
+              },
+              scales: {
+                  yAxes: [{
+                   ticks: {
+                      beginAtZero: true
+                    }
+                  }]
             }
-          });
+          }});
           </script>
 
     </div>
