@@ -8,7 +8,7 @@ pip3 install -r requirements.txt
 #Step 3 - Run the project:
 flask run
 
-#admin and user login credentials 
+#admin and user login credentials: 
 username: admin,
 password: csc330 
 
